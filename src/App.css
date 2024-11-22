@@ -6,9 +6,9 @@
   filter: drop-shadow(0 0 2em #61dafb);
 }
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter Tight, Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 150%;
   font-weight: 400;
 
   color: #0f0f0f;
@@ -21,6 +21,14 @@
   -webkit-text-size-adjust: 100%;
 
   color-scheme: light dark;
+
+  --page-bg: light-dark("#EFEFEF", "#222");
+  --text-color: light-dark("#222", "#EFEFEF");
+}
+
+body {
+  background-color: var(--page-bg);
+  color: var(--text-color);
 }
 
 .container {

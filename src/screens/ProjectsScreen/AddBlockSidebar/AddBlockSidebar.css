@@ -1,0 +1,17 @@
+.AddBlockSidebar {
+  --width: 300px;
+  width: var(--width);
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  transition: transform 420ms ease-in;
+}
+
+.AddBlockSidebar.closed {
+  transform: translateX(var(--width));
+}
+
+.AddBlockSidebar.open {
+  transform: translateX(var(0));
+}

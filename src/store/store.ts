@@ -5,6 +5,9 @@ export interface AppState {
   currentProject: string;
   setCurrentProject: (project: string) => void;
 
+  projectSidebar: boolean;
+  toggleProjectSidebar: () => void;
+
   projects: Project[];
   addProject: (project: Project) => void;
   //   removeProject: (id: number) => void;
@@ -14,7 +17,7 @@ export interface AppState {
   //   removeBlock: (id: number) => void;
 }
 
-export const useStore = create<AppState>()(
+export const useAppStore = create<AppState>()(
   devtools(
     // Optional persist
     // This saves Zustand state when you close browser
@@ -27,6 +30,12 @@ export const useStore = create<AppState>()(
       setCurrentProject: (currentProject) =>
         set(() => ({
           currentProject,
+        })),
+
+      projectSidebar: false,
+      toggleProjectSidebar: () =>
+        set((state) => ({
+          projectSidebar: !state.projectSidebar,
         })),
 
       projects: [],
@@ -52,4 +61,4 @@ export const useStore = create<AppState>()(
   )
 );
 
-export default useStore;
+export default useAppStore;

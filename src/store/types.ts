@@ -1,12 +1,12 @@
-type Project = {
+export type Project = {
   id: string;
   name: string;
 };
 
-const BLOCK_TYPES = ["vscode"] as const;
-type BlockTypes = typeof BLOCK_TYPES;
+export const BLOCK_TYPES = ["vscode"] as const;
+export type BlockTypes = (typeof BLOCK_TYPES)[number];
 
-type Block = {
+export type Block = {
   name: string;
   type: BlockTypes;
   // The associated project
