@@ -71,6 +71,7 @@ h1 {
 }
 
 input,
+select,
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -96,11 +97,6 @@ button:active {
   background-color: #e8e8e8;
 }
 
-input,
-button {
-  outline: none;
-}
-
 #greet-input {
   margin-right: 5px;
 }
@@ -116,7 +112,8 @@ button {
   }
 
   input,
-  button {
+  button,
+  select {
     color: #ffffff;
     background-color: #0f0f0f98;
   }
