@@ -15,7 +15,7 @@ const BlockButton = ({ block }: Props) => {
       const newImageSrc = convertFileSrc(imagePath);
       setImageSrc(newImageSrc);
     };
-    getImage();
+    if (block.image) getImage();
   }, [block]);
 
   const handleProject = (block: Block) => async () => {
@@ -23,7 +23,7 @@ const BlockButton = ({ block }: Props) => {
   };
   return (
     <button className="BlockButton" onClick={handleProject(block)}>
-      <img src={imageSrc} />
+      {!block.image && <img src={imageSrc} />}
       <h3>{block.name}</h3>
       <h5>{block.command}</h5>
     </button>

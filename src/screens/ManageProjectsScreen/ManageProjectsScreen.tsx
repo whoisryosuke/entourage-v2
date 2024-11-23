@@ -3,13 +3,19 @@ import useAppStore from "../../store/store";
 import { useNavigate } from "react-router";
 import "./ManageProjectsScreen.css";
 import { Project } from "../../store/types";
+import CloseIcon from "../../components/icons/CloseIcon";
 
 type Props = {};
 
 const ManageProjectsScreen = (props: Props) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const { currentProject, setCurrentProject, projects, addProject } =
-    useAppStore();
+  const {
+    currentProject,
+    setCurrentProject,
+    projects,
+    addProject,
+    removeProject,
+  } = useAppStore();
   const navigate = useNavigate();
 
   const handleAddProject = () => {
@@ -35,6 +41,10 @@ const ManageProjectsScreen = (props: Props) => {
     navigate("/");
   };
 
+  const handleRemoveProject = (index: number) => () => {
+    removeProject(index);
+  };
+
   return (
     <div className="manage-project-container">
       <div className="manage-project-bar">
@@ -45,8 +55,13 @@ const ManageProjectsScreen = (props: Props) => {
       <div style={{ display: "flex" }}>
         <div className="project-list" style={{ width: "61.8%" }}>
           <ul>
-            {projects.map((project) => (
-              <li>{project.name}</li>
+            {projects.map((project, index) => (
+              <li>
+                {project.name}{" "}
+                <button onClick={handleRemoveProject(index)}>
+                  <CloseIcon />
+                </button>
+              </li>
             ))}
           </ul>
         </div>

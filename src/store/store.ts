@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
+import { Block, Project } from "./types";
 
 export interface AppState {
   currentProject: string;
@@ -10,11 +11,12 @@ export interface AppState {
 
   projects: Project[];
   addProject: (project: Project) => void;
-  //   removeProject: (id: number) => void;
+  /** Removes project and all associated blocks */
+  removeProject: (id: number) => void;
 
   blocks: Block[];
   addBlock: (block: Block) => void;
-  //   removeBlock: (id: number) => void;
+  removeBlock: (id: number) => void;
 }
 
 export const useAppStore = create<AppState>()(
@@ -43,11 +45,27 @@ export const useAppStore = create<AppState>()(
         set((state) => ({
           projects: [...state.projects, project],
         })),
+      removeProject: (projectIndex) =>
+        set((state) => {
+          const projectId = state.projects[projectIndex].id;
+          return {
+            projects: [
+              ...state.projects.filter((_, index) => index !== projectIndex),
+            ],
+            blocks: [
+              ...state.blocks.filter((block) => block.project !== projectId),
+            ],
+          };
+        }),
 
       blocks: [],
       addBlock: (block) =>
         set((state) => ({
           blocks: [...state.blocks, block],
+        })),
+      removeBlock: (blockId) =>
+        set((state) => ({
+          blocks: [...state.blocks.filter((_, index) => index !== blockId)],
         })),
 
       // Add any default values for app-wide state here

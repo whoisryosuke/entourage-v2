@@ -31,7 +31,7 @@ const ProjectBar = (props: Props) => {
         ))}
         {projects.length == 0 && <option>Please add one</option>}
       </select>
-      <button onClick={handleNewProject}>New Project</button>
+      <button onClick={handleNewProject}>Manage Projects</button>
       {projects.length > 0 && currentProject != "" && (
         <button onClick={handleNewBlock}>New Block</button>
       )}

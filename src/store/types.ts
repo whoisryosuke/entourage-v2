@@ -5,6 +5,9 @@ export type Project = {
 
 export const BLOCK_TYPES = ["vscode"] as const;
 export type BlockTypes = (typeof BLOCK_TYPES)[number];
+export const BLOCK_TYPE_DESCRIPTIONS: Record<BlockTypes, string> = {
+  vscode: "Open Project in VS Code",
+};
 
 export type Block = {
   name: string;

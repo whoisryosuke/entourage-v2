@@ -1,7 +1,11 @@
 import React, { useRef, useState } from "react";
 import useAppStore from "../../../store/store";
 import "./AddBlockSidebar.css";
-import { Block, BLOCK_TYPES } from "../../../store/types";
+import {
+  Block,
+  BLOCK_TYPE_DESCRIPTIONS,
+  BLOCK_TYPES,
+} from "../../../store/types";
 import { open } from "@tauri-apps/plugin-dialog";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { create, BaseDirectory } from "@tauri-apps/plugin-fs";
@@ -55,6 +59,7 @@ const AddBlockSidebar = (props: Props) => {
     // Clear inputs
     nameRef.current.value = "";
     commandRef.current.value = "";
+    setImagePath("");
   };
 
   const handleSelectImage = async () => {
@@ -82,9 +87,12 @@ const AddBlockSidebar = (props: Props) => {
       <div className="content">
         <input ref={nameRef} type="text" placeholder="Name of block" />
         <input ref={commandRef} type="text" placeholder="Command" />
-        <select value={type} onChange={handleTypeChange}>
+        <label htmlFor="block-type">Command Type:</label>
+        <select name="block-type" value={type} onChange={handleTypeChange}>
           {BLOCK_TYPES.map((blockType) => (
-            <option value={blockType}>{blockType}</option>
+            <option value={blockType}>
+              {BLOCK_TYPE_DESCRIPTIONS[blockType]}
+            </option>
           ))}
         </select>
         <div
