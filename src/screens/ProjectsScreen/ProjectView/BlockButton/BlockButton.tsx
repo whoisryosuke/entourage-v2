@@ -1,7 +1,8 @@
 import { convertFileSrc, invoke } from "@tauri-apps/api/core";
-import { localDataDir } from "@tauri-apps/api/path";
+import { appLocalDataDir, localDataDir } from "@tauri-apps/api/path";
 import React, { useEffect, useState } from "react";
-import { Block } from "../../../store/types";
+import { Block } from "../../../../store/types";
+import "./BlockButton.css";
 
 type Props = { block: Block };
 
@@ -10,7 +11,7 @@ const BlockButton = ({ block }: Props) => {
 
   useEffect(() => {
     const getImage = async () => {
-      const imagePath = `${await localDataDir()}${block.image}`;
+      const imagePath = `${await appLocalDataDir()}/${block.image}`;
       const newImageSrc = convertFileSrc(imagePath);
       setImageSrc(newImageSrc);
     };
@@ -21,7 +22,7 @@ const BlockButton = ({ block }: Props) => {
     await invoke("open_vscode_project", { name: block.command });
   };
   return (
-    <button onClick={handleProject(block)}>
+    <button className="BlockButton" onClick={handleProject(block)}>
       <img src={imageSrc} />
       <h3>{block.name}</h3>
       <h5>{block.command}</h5>

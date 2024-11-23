@@ -3,7 +3,7 @@ import useAppStore from "../../../store/store";
 import { convertFileSrc, invoke } from "@tauri-apps/api/core";
 import { Block } from "../../../store/types";
 import { localDataDir } from "@tauri-apps/api/path";
-import BlockButton from "./BlockButton";
+import BlockButton from "./BlockButton/BlockButton";
 
 type Props = {};
 

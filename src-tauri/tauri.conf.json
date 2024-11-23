@@ -23,10 +23,10 @@
       "assetProtocol": {
         "enable": true,
         "scope": [
+          "$APPLOCALDATA/**",
           "$APPCACHE/**",
           "$RESOURCE/**",
-          "$DOWNLOAD/**",
-          "$APPLOCALDATA/**"
+          "$DOWNLOAD/**"
         ]
       }
     }
