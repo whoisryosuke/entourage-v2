@@ -22,9 +22,6 @@
 
   color-scheme: light dark;
 
-  --page-bg: light-dark("#EFEFEF", "#222");
-  --text-color: light-dark("#222", "#EFEFEF");
-
   /*  General
  *  ─────────────────────────────────── */
 
@@ -344,11 +341,17 @@
   --orange-8-rgb: 232, 89, 12;
   --orange-9: #d9480f;
   --orange-9-rgb: 217, 72, 15;
+
+  --page-bg: light-dark(var(--gray-2), var(--gray-8));
+  --text-color: light-dark(var(--gray-8), var(--gray-1));
+  --border-color: light-dark(var(--gray-3), var(--gray-7));
 }
 
 body {
   background-color: var(--page-bg);
   color: var(--text-color);
+  margin: 0;
+  min-height: 100vh;
 }
 
 .container {

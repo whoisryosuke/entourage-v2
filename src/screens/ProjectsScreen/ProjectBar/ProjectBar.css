@@ -1,3 +1,12 @@
 .ProjectBar {
   width: 100%;
+  background-color: var(--gray-9);
+  border-bottom: 2px solid;
+  border-color: var(--border-color);
+}
+.ProjectBar .content {
+  padding: 1rem;
+}
+.ProjectBar h2 {
+  margin: 0;
 }

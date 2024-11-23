@@ -25,16 +25,18 @@ const ProjectBar = (props: Props) => {
 
   return (
     <div className="ProjectBar">
-      <select value={currentProject} onChange={handleProjectChange}>
-        {projects.map((project) => (
-          <option value={project.id}>{project.name}</option>
-        ))}
-        {projects.length == 0 && <option>Please add one</option>}
-      </select>
-      <button onClick={handleNewProject}>Manage Projects</button>
-      {projects.length > 0 && currentProject != "" && (
-        <button onClick={handleNewBlock}>New Block</button>
-      )}
+      <div className="content">
+        <select value={currentProject} onChange={handleProjectChange}>
+          {projects.map((project) => (
+            <option value={project.id}>{project.name}</option>
+          ))}
+          {projects.length == 0 && <option>Please add one</option>}
+        </select>
+        <button onClick={handleNewProject}>Manage Projects</button>
+        {projects.length > 0 && currentProject != "" && (
+          <button onClick={handleNewBlock}>New Block</button>
+        )}
+      </div>
     </div>
   );
 };

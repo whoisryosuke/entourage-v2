@@ -13,7 +13,8 @@ import { create, BaseDirectory } from "@tauri-apps/plugin-fs";
 type Props = {};
 
 const AddBlockSidebar = (props: Props) => {
-  const { currentProject, projectSidebar, addBlock } = useAppStore();
+  const { currentProject, projectSidebar, addBlock, toggleProjectSidebar } =
+    useAppStore();
   const [type, setType] = useState(BLOCK_TYPES[0]);
   const nameRef = useRef<HTMLInputElement | null>(null);
   const commandRef = useRef<HTMLInputElement | null>(null);
@@ -83,26 +84,42 @@ const AddBlockSidebar = (props: Props) => {
 
   const openStatus = projectSidebar ? "open" : "closed";
   return (
-    <div className={`AddBlockSidebar ${openStatus}`}>
-      <div className="content">
-        <input ref={nameRef} type="text" placeholder="Name of block" />
-        <input ref={commandRef} type="text" placeholder="Command" />
-        <label htmlFor="block-type">Command Type:</label>
-        <select name="block-type" value={type} onChange={handleTypeChange}>
-          {BLOCK_TYPES.map((blockType) => (
-            <option value={blockType}>
-              {BLOCK_TYPE_DESCRIPTIONS[blockType]}
-            </option>
-          ))}
-        </select>
-        <div
-          className="image-preview"
-          style={{ backgroundImage: `url(${imageSrc})` }}
-        />
-        <button onClick={handleSelectImage}>Select new image</button>
-        <button onClick={handleCreateBlock}>Create block</button>
+    <>
+      <div
+        className={`AddBlockSidebarMask ${openStatus}`}
+        onClick={toggleProjectSidebar}
+      />
+      <div className={`AddBlockSidebar ${openStatus}`}>
+        <div className="content">
+          <input
+            ref={nameRef}
+            name="block-name"
+            type="text"
+            placeholder="Name of block"
+          />
+          <input
+            ref={commandRef}
+            name="block-command"
+            type="text"
+            placeholder="Command"
+          />
+          <label htmlFor="block-type">Command Type:</label>
+          <select name="block-type" value={type} onChange={handleTypeChange}>
+            {BLOCK_TYPES.map((blockType) => (
+              <option value={blockType}>
+                {BLOCK_TYPE_DESCRIPTIONS[blockType]}
+              </option>
+            ))}
+          </select>
+          <div
+            className="image-preview"
+            style={{ backgroundImage: `url(${imageSrc})` }}
+          />
+          <button onClick={handleSelectImage}>Select new image</button>
+          <button onClick={handleCreateBlock}>Create block</button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

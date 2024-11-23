@@ -1,11 +1,35 @@
+.AddBlockSidebarMask {
+  position: fixed;
+  inset: 0;
+  background: rgb(0, 0, 0, 0.5);
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 420ms ease-in;
+}
+.AddBlockSidebarMask.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
 .AddBlockSidebar {
   --width: 300px;
   width: var(--width);
+  height: 100%;
   position: fixed;
   top: 0;
   right: 0;
 
   transition: transform 420ms ease-in;
+
+  background-color: var(--border-color);
+  border-left: 4px solid;
+  border-color: light-dark(var(--gray-4), var(--gray-6));
 }
 .AddBlockSidebar .content {
   padding: 1rem;

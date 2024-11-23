@@ -18,7 +18,15 @@ const ProjectView = (props: Props) => {
     <BlockButton key={block.name} block={block} />
   ));
 
-  return <div>{projectBlocks}</div>;
+  return (
+    <div>
+      {projectBlocks.length > 0 ? (
+        projectBlocks
+      ) : (
+        <div style={{ padding: "1rem" }}>Create some blocks!</div>
+      )}
+    </div>
+  );
 };
 
 export default ProjectView;
