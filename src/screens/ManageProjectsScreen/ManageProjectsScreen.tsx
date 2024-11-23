@@ -44,6 +44,8 @@ const ManageProjectsScreen = (props: Props) => {
   };
 
   const handleRemoveProject = (index: number) => () => {
+    // If it's the last project removed, wipe out current project
+    if (projects.length == 1) setCurrentProject("");
     removeProject(index);
   };
 
@@ -63,17 +65,21 @@ const ManageProjectsScreen = (props: Props) => {
               <ul>
                 {projects.map((project, index) => {
                   const numBlocks = blocks.filter(
-                    (block) => block.project == currentProject
+                    (block) => block.project == project.id
                   ).length;
                   return (
                     <li>
                       <span>
                         <strong>{project.name}</strong>
                         <em>
-                          ({numBlocks} block{numBlocks > 1 && "s"})
+                          ({numBlocks} block
+                          {numBlocks > 1 || (numBlocks == 0 && "s")})
                         </em>
                       </span>{" "}
-                      <button onClick={handleRemoveProject(index)}>
+                      <button
+                        title="Remove Project"
+                        onClick={handleRemoveProject(index)}
+                      >
                         <CloseIcon />
                       </button>
                     </li>
@@ -89,6 +95,7 @@ const ManageProjectsScreen = (props: Props) => {
               flexDirection: "column",
             }}
           >
+            <h3>New project:</h3>
             <input ref={inputRef} type="text" placeholder="Project Name" />
             <button onClick={handleAddProject}>Add Project</button>
           </div>
