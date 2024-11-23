@@ -1,12 +1,42 @@
 .BlockButton {
   width: 100%;
   text-align: left;
+  position: relative;
+}
+
+.BlockButton button {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.BlockButton .content {
+  position: relative;
+  z-index: 420;
+  padding: 1rem;
 }
 
 .BlockButton img {
   width: 100%;
 }
 
+.BlockButton h3 {
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
 .BlockButton h5 {
   color: light-dark(var(--gray-4), var(--gray-6));
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+.NotionIcon {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+.NotionIcon svg path {
+  transition: fill 220ms ease-in;
+}
+.NotionIcon:hover {
+  --fill: var(--blue-8);
 }

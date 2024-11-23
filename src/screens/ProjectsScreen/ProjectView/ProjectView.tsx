@@ -29,6 +29,8 @@ const ProjectView = (props: Props) => {
     <BlockButton key={block.name} block={block} />
   ));
 
+  console.log("blocks", filteredBlocks);
+
   return (
     <div className="ProjectView">
       <FilterProjects value={projectFilter} onChange={handleProjectFilter} />

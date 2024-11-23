@@ -15,6 +15,7 @@ export type Block = {
   // The associated project
   project: string;
   command: string;
+  notion: string;
   // Path to image (Tauri specific path)
   image: string;
 };

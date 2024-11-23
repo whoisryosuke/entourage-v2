@@ -3,6 +3,7 @@ import { appLocalDataDir, localDataDir } from "@tauri-apps/api/path";
 import React, { useEffect, useState } from "react";
 import { Block } from "../../../../store/types";
 import "./BlockButton.css";
+import NotionIcon from "../../../../components/icons/NotionIcon";
 
 type Props = { block: Block };
 
@@ -22,11 +23,19 @@ const BlockButton = ({ block }: Props) => {
     await invoke("open_vscode_project", { name: block.command });
   };
   return (
-    <button className="BlockButton" onClick={handleProject(block)}>
-      {!block.image && <img src={imageSrc} />}
-      <h3>{block.name}</h3>
-      <h5>{block.command}</h5>
-    </button>
+    <div className="BlockButton">
+      <button onClick={handleProject(block)} />
+      <div className="content">
+        {!block.image && <img src={imageSrc} />}
+        <h3>{block.name}</h3>
+        <h5>{block.command}</h5>
+        {block.notion != "" && (
+          <a href={`notion://${block.notion}`} className="NotionIcon">
+            <NotionIcon width={24} height={24} />
+          </a>
+        )}
+      </div>
+    </div>
   );
 };
 

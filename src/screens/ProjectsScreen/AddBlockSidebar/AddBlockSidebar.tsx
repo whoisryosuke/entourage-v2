@@ -18,6 +18,7 @@ const AddBlockSidebar = (props: Props) => {
   const [type, setType] = useState(BLOCK_TYPES[0]);
   const nameRef = useRef<HTMLInputElement | null>(null);
   const commandRef = useRef<HTMLInputElement | null>(null);
+  const notionRef = useRef<HTMLInputElement | null>(null);
   const [imagePath, setImagePath] = useState("");
 
   const imageSrc = imagePath != "" ? convertFileSrc(imagePath) : "";
@@ -48,11 +49,16 @@ const AddBlockSidebar = (props: Props) => {
     await file.write(imageData);
     await file.close();
 
+    const notionValue = notionRef?.current
+      ? notionRef.current.value.replace("https://", "")
+      : "";
+
     const newBlock: Block = {
       name: nameRef.current.value,
       type,
       project: currentProject,
       command: commandRef.current.value,
+      notion: notionValue,
       image: saveImagePath,
     };
     addBlock(newBlock);
@@ -102,6 +108,12 @@ const AddBlockSidebar = (props: Props) => {
             name="block-command"
             type="text"
             placeholder="Command"
+          />
+          <input
+            ref={notionRef}
+            name="block-notion"
+            type="text"
+            placeholder="Notion Project URL"
           />
           <label htmlFor="block-type">Command Type:</label>
           <select name="block-type" value={type} onChange={handleTypeChange}>

@@ -11,6 +11,7 @@
   pointer-events: none;
 
   transition: opacity 420ms ease-in;
+  z-index: 710;
 }
 .AddBlockSidebarMask.open {
   opacity: 1;
@@ -30,6 +31,8 @@
   background-color: var(--border-color);
   border-left: 4px solid;
   border-color: light-dark(var(--gray-4), var(--gray-6));
+
+  z-index: 710;
 }
 .AddBlockSidebar .content {
   padding: 1rem;
