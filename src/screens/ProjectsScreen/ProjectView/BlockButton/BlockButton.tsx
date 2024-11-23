@@ -35,7 +35,7 @@ const BlockButton = ({ block, index }: Props) => {
         className="content"
         onClick={editMode ? undefined : handleProject(block)}
       >
-        {!block.image && <img src={imageSrc} />}
+        {block.image && <img src={imageSrc} />}
         <h3>{block.name}</h3>
         <h5>{block.command}</h5>
       </div>
