@@ -25,8 +25,8 @@ const ProjectView = (props: Props) => {
         : true
     );
 
-  const projectBlocks = filteredBlocks.map((block) => (
-    <BlockButton key={block.name} block={block} />
+  const projectBlocks = filteredBlocks.map((block, blockIndex) => (
+    <BlockButton key={block.name} block={block} index={blockIndex} />
   ));
 
   console.log("blocks", filteredBlocks);

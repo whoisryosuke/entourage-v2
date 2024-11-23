@@ -4,16 +4,18 @@
   position: relative;
 }
 
-.BlockButton button {
+.BlockButton .button-bg {
   position: absolute;
   inset: 0;
   z-index: 1;
+  cursor: pointer;
 }
 
 .BlockButton .content {
   position: relative;
-  z-index: 420;
   padding: 1rem;
+  background-color: light-dark(var(--gray-4), var(--gray-9));
+  border-radius: 1rem;
 }
 
 .BlockButton img {
@@ -29,6 +31,19 @@
   margin: 0;
   margin-bottom: 0.5rem;
 }
+.BlockButton .controls {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+.BlockButton .controls button {
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.5rem;
+}
+.BlockButton .controls button:last-child {
+  margin-right: 0;
+}
+
 .NotionIcon {
   position: absolute;
   bottom: 1rem;

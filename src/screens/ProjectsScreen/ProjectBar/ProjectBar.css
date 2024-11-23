@@ -6,6 +6,9 @@
 }
 .ProjectBar .content {
   padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .ProjectBar h2 {
   margin: 0;

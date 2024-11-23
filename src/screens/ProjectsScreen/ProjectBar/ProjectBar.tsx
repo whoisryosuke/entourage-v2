@@ -6,8 +6,14 @@ import { useNavigate } from "react-router";
 type Props = {};
 
 const ProjectBar = (props: Props) => {
-  const { projects, currentProject, setCurrentProject, toggleProjectSidebar } =
-    useAppStore();
+  const {
+    projects,
+    currentProject,
+    setCurrentProject,
+    toggleProjectSidebar,
+    editMode,
+    toggleEditMode,
+  } = useAppStore();
   let navigate = useNavigate();
 
   const handleNewProject = () => {
@@ -22,20 +28,32 @@ const ProjectBar = (props: Props) => {
   const handleNewBlock = () => {
     toggleProjectSidebar();
   };
+  const handleEditMode = () => {
+    toggleEditMode();
+  };
 
   return (
     <div className="ProjectBar">
       <div className="content">
-        <select value={currentProject} onChange={handleProjectChange}>
-          {projects.map((project) => (
-            <option value={project.id}>{project.name}</option>
-          ))}
-          {projects.length == 0 && <option>Please add one</option>}
-        </select>
-        <button onClick={handleNewProject}>Manage Projects</button>
-        {projects.length > 0 && currentProject != "" && (
-          <button onClick={handleNewBlock}>New Block</button>
-        )}
+        <div>
+          <select value={currentProject} onChange={handleProjectChange}>
+            {projects.map((project) => (
+              <option value={project.id}>{project.name}</option>
+            ))}
+            {projects.length == 0 && <option>Please add one</option>}
+          </select>
+          <button onClick={handleNewProject}>Manage Projects</button>
+        </div>
+        <div>
+          {projects.length > 0 && currentProject != "" && (
+            <>
+              <button onClick={handleNewBlock}>New Block</button>
+              <button onClick={handleEditMode}>
+                {editMode ? "Done editing" : "Edit Blocks"}
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

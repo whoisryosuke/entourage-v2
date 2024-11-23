@@ -9,6 +9,9 @@ export interface AppState {
   projectSidebar: boolean;
   toggleProjectSidebar: () => void;
 
+  editMode: boolean;
+  toggleEditMode: () => void;
+
   projects: Project[];
   addProject: (project: Project) => void;
   /** Removes project and all associated blocks */
@@ -38,6 +41,12 @@ export const useAppStore = create<AppState>()(
       toggleProjectSidebar: () =>
         set((state) => ({
           projectSidebar: !state.projectSidebar,
+        })),
+
+      editMode: false,
+      toggleEditMode: () =>
+        set((state) => ({
+          editMode: !state.editMode,
         })),
 
       projects: [],
