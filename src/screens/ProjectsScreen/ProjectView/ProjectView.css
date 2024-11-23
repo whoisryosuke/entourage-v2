@@ -1,0 +1,15 @@
+.ProjectView {
+  padding: 1rem;
+}
+.ProjectGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(50px, auto);
+}
+.FilterProjects {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: stretch;
+  flex-direction: column;
+}

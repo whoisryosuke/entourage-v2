@@ -1,8 +1,12 @@
 .BlockButton {
-  width: 200px;
+  width: 100%;
   text-align: left;
 }
 
 .BlockButton img {
   width: 100%;
+}
+
+.BlockButton h5 {
+  color: light-dark(var(--gray-4), var(--gray-6));
 }
