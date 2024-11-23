@@ -1,5 +1,6 @@
 .BlockButton {
   width: 100%;
+  height: fit-content;
   text-align: left;
   position: relative;
 }
