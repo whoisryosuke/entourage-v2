@@ -19,6 +19,12 @@
   margin: 0;
   margin-bottom: 1rem;
 }
+.project-list li strong {
+  margin-right: 1rem;
+}
+.project-list li em {
+  font-size: 0.8rem;
+}
 .project-input-container {
   margin-top: 1rem;
 }

@@ -13,3 +13,10 @@
 .ProjectBar h2 {
   margin: 0;
 }
+.ProjectBar .content button,
+.ProjectBar .content select {
+  margin-right: 0.5rem;
+}
+.ProjectBar .content button:last-child {
+  margin-right: 0;
+}

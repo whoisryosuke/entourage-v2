@@ -11,6 +11,7 @@ type Props = {};
 const ManageProjectsScreen = (props: Props) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const {
+    blocks,
     currentProject,
     setCurrentProject,
     projects,
@@ -60,14 +61,24 @@ const ManageProjectsScreen = (props: Props) => {
             <div>
               <h3>All projects:</h3>
               <ul>
-                {projects.map((project, index) => (
-                  <li>
-                    {project.name}{" "}
-                    <button onClick={handleRemoveProject(index)}>
-                      <CloseIcon />
-                    </button>
-                  </li>
-                ))}
+                {projects.map((project, index) => {
+                  const numBlocks = blocks.filter(
+                    (block) => block.project == currentProject
+                  ).length;
+                  return (
+                    <li>
+                      <span>
+                        <strong>{project.name}</strong>
+                        <em>
+                          ({numBlocks} block{numBlocks > 1 && "s"})
+                        </em>
+                      </span>{" "}
+                      <button onClick={handleRemoveProject(index)}>
+                        <CloseIcon />
+                      </button>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>
