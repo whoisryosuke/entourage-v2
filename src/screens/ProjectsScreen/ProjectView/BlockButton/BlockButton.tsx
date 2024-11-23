@@ -7,6 +7,7 @@ import NotionIcon from "../../../../components/icons/NotionIcon";
 import useAppStore from "../../../../store/store";
 import TrashIcon from "../../../../components/icons/TrashIcon";
 import EditIcon from "../../../../components/icons/EditIcon";
+import { remove, BaseDirectory } from "@tauri-apps/plugin-fs";
 
 type Props = { block: Block; index: number };
 
@@ -28,6 +29,10 @@ const BlockButton = ({ block, index }: Props) => {
   };
   const handleRemoveBlock = () => {
     removeBlock(index);
+    // Delete image from disk
+    remove(block.image, {
+      baseDir: BaseDirectory.AppLocalData,
+    });
   };
   return (
     <div className="BlockButton">
