@@ -13,3 +13,9 @@
   justify-content: stretch;
   flex-direction: column;
 }
+
+@media (min-width: 1280px) {
+  .ProjectGrid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
