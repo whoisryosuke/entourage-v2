@@ -12,4 +12,6 @@ export type Block = {
   // The associated project
   project: string;
   command: string;
+  // Path to image (Tauri specific path)
+  image: string;
 };

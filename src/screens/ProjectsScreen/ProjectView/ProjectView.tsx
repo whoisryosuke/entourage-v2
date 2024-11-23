@@ -1,7 +1,9 @@
 import React from "react";
 import useAppStore from "../../../store/store";
-import { invoke } from "@tauri-apps/api/core";
+import { convertFileSrc, invoke } from "@tauri-apps/api/core";
 import { Block } from "../../../store/types";
+import { localDataDir } from "@tauri-apps/api/path";
+import BlockButton from "./BlockButton";
 
 type Props = {};
 
@@ -12,15 +14,8 @@ const ProjectView = (props: Props) => {
     (block) => block.project == currentProject
   );
 
-  const handleProject = (block: Block) => async () => {
-    await invoke("open_vscode_project", { name: block.command });
-  };
-
   const projectBlocks = filteredBlocks.map((block) => (
-    <button onClick={handleProject(block)}>
-      <h3>{block.name}</h3>
-      <h5>{block.command}</h5>
-    </button>
+    <BlockButton key={block.name} block={block} />
   ));
 
   return <div>{projectBlocks}</div>;

@@ -4,6 +4,7 @@ import "./AddBlockSidebar.css";
 import { Block, BLOCK_TYPES } from "../../../store/types";
 import { open } from "@tauri-apps/plugin-dialog";
 import { convertFileSrc } from "@tauri-apps/api/core";
+import { create, BaseDirectory } from "@tauri-apps/plugin-fs";
 
 type Props = {};
 
@@ -12,32 +13,48 @@ const AddBlockSidebar = (props: Props) => {
   const [type, setType] = useState(BLOCK_TYPES[0]);
   const nameRef = useRef<HTMLInputElement | null>(null);
   const commandRef = useRef<HTMLInputElement | null>(null);
-  const imageRef = useRef<HTMLInputElement | null>(null);
   const [imagePath, setImagePath] = useState("");
+
+  const imageSrc = imagePath != "" ? convertFileSrc(imagePath) : "";
 
   const handleTypeChange = (e) => {
     console.log("changing project", e.currentTarget.value);
     setType(e.currentTarget.value);
   };
 
-  const handleCreateBlock = () => {
+  const handleCreateBlock = async () => {
     if (nameRef.current == null) return;
     if (commandRef.current == null) return;
-    if (imageRef.current == null) return;
 
-    console.log("image", imageRef.current, imageRef.current.value);
+    // Save image to cache folder and keep path for Block
+    const pathSplit = imagePath.split(".");
+    const fileExtension = pathSplit[pathSplit.length - 1];
+    const hash = Number(new Date()).toString(36);
+    const saveImagePath = `${hash}.${fileExtension}`;
+    console.log("saving image path", saveImagePath);
 
-    // const newBlock: Block = {
-    //   name: nameRef.current.value,
-    //   type,
-    //   project: currentProject,
-    //   command: commandRef.current.value,
-    // };
-    // addBlock(newBlock);
+    const file = await create(saveImagePath, {
+      baseDir: BaseDirectory.AppLocalData,
+    });
+    const imageData = await fetch(imageSrc).then(
+      // Tauri requires a Uint8Array of data
+      async (res) => new Uint8Array(await res.arrayBuffer())
+    );
+    await file.write(imageData);
+    await file.close();
 
-    // // Clear inputs
-    // nameRef.current.value = "";
-    // commandRef.current.value = "";
+    const newBlock: Block = {
+      name: nameRef.current.value,
+      type,
+      project: currentProject,
+      command: commandRef.current.value,
+      image: saveImagePath,
+    };
+    addBlock(newBlock);
+
+    // Clear inputs
+    nameRef.current.value = "";
+    commandRef.current.value = "";
   };
 
   const handleSelectImage = async () => {
@@ -60,7 +77,6 @@ const AddBlockSidebar = (props: Props) => {
   };
 
   const openStatus = projectSidebar ? "open" : "closed";
-  const imageSrc = imagePath != "" ? convertFileSrc(imagePath) : "";
   return (
     <div className={`AddBlockSidebar ${openStatus}`}>
       <div className="content">
@@ -75,12 +91,6 @@ const AddBlockSidebar = (props: Props) => {
           className="image-preview"
           style={{ backgroundImage: `url(${imageSrc})` }}
         />
-        {/* <input
-        ref={imageRef}
-        type="file"
-        placeholder="Cover image"
-        accept=".jpg,.jpeg,.gif,.png,.svg,.webp"
-      /> */}
         <button onClick={handleSelectImage}>Select new image</button>
         <button onClick={handleCreateBlock}>Create block</button>
       </div>
