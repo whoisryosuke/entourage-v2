@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "entourage-v3",
+  "productName": "entourage",
   "version": "0.1.0",
   "identifier": "com.entourage.app",
   "build": {
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "entourage-v3",
+        "title": "entourage",
         "width": 800,
         "height": 600
       }
