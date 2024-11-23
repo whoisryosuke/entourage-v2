@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import useAppStore from "../../store/store";
 import { useNavigate } from "react-router";
 import "./ManageProjectsScreen.css";
+import { Project } from "../../store/types";
 
 type Props = {};
 
