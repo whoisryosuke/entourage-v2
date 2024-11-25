@@ -12,9 +12,11 @@
   "app": {
     "windows": [
       {
-        "title": "entourage",
+        "title": "Entourage",
         "width": 1920,
-        "height": 1080
+        "height": 1080,
+        "maximizable": true,
+        "theme": "Dark"
       }
     ],
 
@@ -33,13 +35,6 @@
   },
   "bundle": {
     "active": true,
-    "targets": "all",
-    "icon": [
-      "icons/32x32.png",
-      "icons/128x128.png",
-      "icons/128x128@2x.png",
-      "icons/icon.icns",
-      "icons/icon.ico"
-    ]
+    "targets": "all"
   }
 }
