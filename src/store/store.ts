@@ -11,6 +11,9 @@ export interface AppState {
 
   editMode: boolean;
   toggleEditMode: () => void;
+  editBlockId: number;
+  setEditBlockId: (editBlockId: number) => void;
+  clearEditBlockId: () => void;
 
   projects: Project[];
   addProject: (project: Project) => void;
@@ -19,6 +22,7 @@ export interface AppState {
 
   blocks: Block[];
   addBlock: (block: Block) => void;
+  updateBlock: (id: number, block: Partial<Block>) => void;
   removeBlock: (id: number) => void;
 }
 
@@ -47,6 +51,16 @@ export const useAppStore = create<AppState>()(
           set((state) => ({
             editMode: !state.editMode,
           })),
+        editBlockId: -1,
+        setEditBlockId: (editBlockId) =>
+          set(() => ({
+            editBlockId,
+          })),
+        clearEditBlockId: () =>
+          set(() => ({
+            editBlockId: -1,
+            projectSidebar: false,
+          })),
 
         projects: [],
         addProject: (project) =>
@@ -71,6 +85,17 @@ export const useAppStore = create<AppState>()(
           set((state) => ({
             blocks: [...state.blocks, block],
           })),
+        updateBlock: (blockId, block) =>
+          set((state) => {
+            const newBlocks = [...state.blocks];
+            newBlocks[blockId] = {
+              ...newBlocks[blockId],
+              ...block,
+            };
+            return {
+              blocks: newBlocks,
+            };
+          }),
         removeBlock: (blockId) =>
           set((state) => ({
             blocks: [...state.blocks.filter((_, index) => index !== blockId)],

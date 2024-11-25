@@ -8,20 +8,26 @@ import useAppStore from "../../../../store/store";
 import TrashIcon from "../../../../components/icons/TrashIcon";
 import EditIcon from "../../../../components/icons/EditIcon";
 import { remove, BaseDirectory } from "@tauri-apps/plugin-fs";
+import { getImage } from "../../../../helpers/images";
 
 type Props = { block: Block; index: number };
 
 const BlockButton = ({ block, index }: Props) => {
-  const { editMode, removeBlock } = useAppStore();
+  const {
+    editMode,
+    removeBlock,
+    setEditBlockId,
+    projectSidebar,
+    toggleProjectSidebar,
+  } = useAppStore();
   const [imageSrc, setImageSrc] = useState("");
 
   useEffect(() => {
-    const getImage = async () => {
-      const imagePath = `${await appLocalDataDir()}/${block.image}`;
-      const newImageSrc = convertFileSrc(imagePath);
+    const getImageAndSave = async () => {
+      const newImageSrc = await getImage(block.image);
       setImageSrc(newImageSrc);
     };
-    if (block.image) getImage();
+    if (block.image) getImageAndSave();
   }, [block]);
 
   const handleProject = (block: Block) => async () => {
@@ -33,6 +39,13 @@ const BlockButton = ({ block, index }: Props) => {
     remove(block.image, {
       baseDir: BaseDirectory.AppLocalData,
     });
+  };
+
+  const handleEditBlock = () => {
+    // Set this block as currently editing
+    setEditBlockId(index);
+    // Open the sidebar
+    if (!projectSidebar) toggleProjectSidebar();
   };
   return (
     <div className="BlockButton">
@@ -51,7 +64,7 @@ const BlockButton = ({ block, index }: Props) => {
       )}
       {editMode && (
         <div className="controls">
-          <button title="Edit Block" onClick={handleRemoveBlock}>
+          <button title="Edit Block" onClick={handleEditBlock}>
             <EditIcon width={18} height={18} />
           </button>
           <button title="Remove Block" onClick={handleRemoveBlock}>
