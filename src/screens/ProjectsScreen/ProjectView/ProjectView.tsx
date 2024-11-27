@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useAppStore from "../../../store/store";
 import { convertFileSrc, invoke } from "@tauri-apps/api/core";
-import { Block } from "../../../store/types";
+import { Block, BlockTypes } from "../../../store/types";
 import { localDataDir } from "@tauri-apps/api/path";
 import BlockButton from "./BlockButton/BlockButton";
 import "./ProjectView.css";
@@ -11,13 +11,21 @@ import SortBlocks, {
   SortTypes,
 } from "./SortBlocks/SortBlocks";
 import Stack from "../../../components/Stack/Stack";
+import FilterType from "./FilterType";
 
 type Props = {};
 
 const ProjectView = (props: Props) => {
   const [projectFilter, setProjectFilter] = useState("");
   const [sortType, setSortType] = useState<SortTypes>("recent");
+  const [blockTypeFilter, setBlockTypeFilter] = useState<BlockTypes | "all">(
+    "all"
+  );
   const { currentProject, blocks } = useAppStore();
+
+  const handleBlockTypeFilterChange = (e) => {
+    setBlockTypeFilter(e.currentTarget.value);
+  };
 
   const handleSortTypeChange = (e) => {
     setSortType(e.currentTarget.value);
@@ -34,6 +42,9 @@ const ProjectView = (props: Props) => {
         ? block.name.toLowerCase().includes(projectFilter.toLowerCase())
         : true
     )
+    .filter((block) =>
+      blockTypeFilter !== "all" ? block.type == blockTypeFilter : true
+    )
     .sort(SORT_ALGORITHMS[sortType]);
 
   const projectBlocks = filteredBlocks.map((block, blockIndex) => (
@@ -46,6 +57,10 @@ const ProjectView = (props: Props) => {
     <div className="ProjectView">
       <Stack>
         <FilterProjects value={projectFilter} onChange={handleProjectFilter} />
+        <FilterType
+          blockTypeFilter={blockTypeFilter}
+          handleBlockTypeFilterChange={handleBlockTypeFilterChange}
+        />
         <SortBlocks
           sortType={sortType}
           handleSortTypeChange={handleSortTypeChange}
