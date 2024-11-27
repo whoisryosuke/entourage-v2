@@ -3,6 +3,8 @@
   height: fit-content;
   text-align: left;
   position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
 
 .BlockButton .button-bg {
@@ -11,12 +13,13 @@
   z-index: 1;
   cursor: pointer;
 }
-
 .BlockButton .content {
   position: relative;
-  padding: 1rem;
   background-color: light-dark(var(--gray-4), var(--gray-9));
-  border-radius: 1rem;
+}
+
+.BlockButton .metadata {
+  padding: 0.5rem 1rem;
 }
 
 .BlockButton img {
@@ -25,12 +28,13 @@
 
 .BlockButton h3 {
   margin: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.15rem;
 }
 .BlockButton h5 {
   color: light-dark(var(--gray-4), var(--gray-6));
   margin: 0;
   margin-bottom: 0.5rem;
+  font-weight: 400;
 }
 .BlockButton .controls {
   position: absolute;

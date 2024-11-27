@@ -54,8 +54,10 @@ const BlockButton = ({ block, index }: Props) => {
         onClick={editMode ? undefined : handleProject(block)}
       >
         {block.image && <img src={imageSrc} />}
-        <h3>{block.name}</h3>
-        <h5>{block.command}</h5>
+        <div className="metadata">
+          <h3>{block.name}</h3>
+          <h5>{block.command}</h5>
+        </div>
       </div>
       {block.notion != "" && (
         <a href={`notion://${block.notion}`} className="NotionIcon">

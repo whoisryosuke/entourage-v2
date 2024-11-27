@@ -43,15 +43,15 @@
   --gray-3-rgb: 222, 226, 230;
   --gray-4: #ced4da;
   --gray-4-rgb: 206, 212, 218;
-  --gray-5: #adb5bd;
+  --gray-5: #b8babb;
   --gray-5-rgb: 173, 181, 189;
-  --gray-6: #868e96;
+  --gray-6: #919496;
   --gray-6-rgb: 134, 142, 150;
-  --gray-7: #495057;
+  --gray-7: #525557;
   --gray-7-rgb: 73, 80, 87;
-  --gray-8: #343a40;
+  --gray-8: #404143;
   --gray-8-rgb: 52, 58, 64;
-  --gray-9: #212529;
+  --gray-9: #262729;
   --gray-9-rgb: 33, 37, 41;
 
   /*  Red
@@ -352,6 +352,9 @@ body {
   color: var(--text-color);
   margin: 0;
   min-height: 100vh;
+
+  background-image: url("images/bg.png");
+  background-size: cover;
 }
 
 .container {

@@ -1,6 +1,6 @@
 .ProjectBar {
   width: 100%;
-  background-color: var(--gray-9);
+  background-color: rgba(0, 0, 0, 0.4);
   border-bottom: 2px solid;
   border-color: var(--border-color);
 }

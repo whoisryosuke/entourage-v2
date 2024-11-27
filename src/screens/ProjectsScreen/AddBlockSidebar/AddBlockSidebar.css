@@ -28,9 +28,9 @@
 
   transition: transform 420ms ease-in;
 
-  background-color: var(--border-color);
+  background-color: light-dark(var(--gray-1), var(--gray-9));
   border-left: 4px solid;
-  border-color: light-dark(var(--gray-4), var(--gray-6));
+  border-color: var(--border-color);
 
   z-index: 710;
 }
