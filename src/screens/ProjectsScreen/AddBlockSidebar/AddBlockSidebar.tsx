@@ -3,6 +3,7 @@ import useAppStore from "../../../store/store";
 import "./AddBlockSidebar.css";
 import {
   Block,
+  BLOCK_TYPE_CMD_PLACEHOLDER,
   BLOCK_TYPE_DESCRIPTIONS,
   BLOCK_TYPES,
 } from "../../../store/types";
@@ -170,7 +171,7 @@ const AddBlockSidebar = (props: Props) => {
             ref={commandRef}
             name="block-command"
             type="text"
-            placeholder="Command"
+            placeholder={BLOCK_TYPE_CMD_PLACEHOLDER[type]}
           />
           <input
             ref={notionRef}

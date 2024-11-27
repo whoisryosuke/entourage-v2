@@ -1,7 +1,7 @@
 import { convertFileSrc, invoke } from "@tauri-apps/api/core";
 import { appLocalDataDir, localDataDir } from "@tauri-apps/api/path";
 import React, { useEffect, useState } from "react";
-import { Block } from "../../../../store/types";
+import { Block, BLOCK_TYPE_BACKEND_CMD } from "../../../../store/types";
 import "./BlockButton.css";
 import NotionIcon from "../../../../components/icons/NotionIcon";
 import useAppStore from "../../../../store/store";
@@ -31,7 +31,7 @@ const BlockButton = ({ block, index }: Props) => {
   }, [block]);
 
   const handleProject = (block: Block) => async () => {
-    await invoke("open_vscode_project", { name: block.command });
+    await invoke(BLOCK_TYPE_BACKEND_CMD[block.type], { name: block.command });
   };
   const handleRemoveBlock = () => {
     removeBlock(index);
