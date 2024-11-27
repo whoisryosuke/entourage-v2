@@ -1,0 +1,21 @@
+.stack {
+  --gap: 20px;
+  display: flex;
+}
+
+.stack.horizontal > * {
+  margin-right: var(--gap);
+}
+.stack.horizontal > *:last-child {
+  margin-right: 0;
+}
+
+.stack.vertical {
+  flex-direction: column;
+}
+.stack.vertical > * {
+  margin-bottom: var(--gap);
+}
+.stack.vertical > *:last-child {
+  margin-bottom: 0;
+}

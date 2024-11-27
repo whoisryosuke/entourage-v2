@@ -18,4 +18,7 @@ export type Block = {
   notion: string;
   // Path to image (Tauri specific path)
   image: string;
+  // Dates
+  created_time: number;
+  last_opened: number;
 };
