@@ -1,7 +1,11 @@
 import { convertFileSrc, invoke } from "@tauri-apps/api/core";
 import { appLocalDataDir, localDataDir } from "@tauri-apps/api/path";
 import React, { useEffect, useState } from "react";
-import { Block, BLOCK_TYPE_BACKEND_CMD } from "../../../../store/types";
+import {
+  Block,
+  BLOCK_TYPE_BACKEND_CMD,
+  BlockTypes,
+} from "../../../../store/types";
 import "./BlockButton.css";
 import NotionIcon from "../../../../components/icons/NotionIcon";
 import useAppStore from "../../../../store/store";
@@ -9,6 +13,14 @@ import TrashIcon from "../../../../components/icons/TrashIcon";
 import EditIcon from "../../../../components/icons/EditIcon";
 import { remove, BaseDirectory } from "@tauri-apps/plugin-fs";
 import { getImage } from "../../../../helpers/images";
+import VSCodeLogo from "../../../../components/icons/VSCodeLogo";
+import BlenderLogo from "../../../../components/icons/BlenderLogo";
+import Stack from "../../../../components/Stack/Stack";
+
+const BLOCK_TYPE_ICONS: Record<BlockTypes, (props: any) => JSX.Element> = {
+  vscode: VSCodeLogo,
+  blender: BlenderLogo,
+};
 
 type Props = { block: Block; index: number };
 
@@ -47,6 +59,9 @@ const BlockButton = ({ block, index }: Props) => {
     // Open the sidebar
     if (!projectSidebar) toggleProjectSidebar();
   };
+
+  const BlockTypeIcon = BLOCK_TYPE_ICONS[block.type];
+
   return (
     <div className="BlockButton">
       <div
@@ -55,7 +70,10 @@ const BlockButton = ({ block, index }: Props) => {
       >
         {block.image && <img src={imageSrc} />}
         <div className="metadata">
-          <h3>{block.name}</h3>
+          <Stack gap="12px">
+            <BlockTypeIcon width="20px" height="20px" />
+            <h3>{block.name}</h3>
+          </Stack>
           <h5>{block.command}</h5>
         </div>
       </div>

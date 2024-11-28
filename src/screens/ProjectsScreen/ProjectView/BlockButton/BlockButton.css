@@ -3,8 +3,12 @@
   height: fit-content;
   text-align: left;
   position: relative;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   overflow: hidden;
+  cursor: pointer;
+  filter: drop-shadow(0px 4px 28.8px rgba(0, 0, 0, 0.25))
+    drop-shadow(0px 4px 13.6px rgba(0, 0, 0, 0.1))
+    drop-shadow(0px 4px 5.1px rgba(0, 0, 0, 0.1));
 }
 
 .BlockButton .button-bg {
@@ -18,19 +22,26 @@
   background-color: light-dark(var(--gray-4), var(--gray-9));
 }
 
-.BlockButton .metadata {
-  padding: 0.5rem 1rem;
+.BlockButton .image {
+  position: relative;
 }
 
+.BlockButton .metadata {
+  padding: 1rem 1rem;
+}
+.BlockButton .metadata svg {
+  transform: translateY(2px);
+}
 .BlockButton img {
   width: 100%;
 }
 
 .BlockButton h3 {
   margin: 0;
-  margin-bottom: 0.15rem;
+  margin-bottom: 0.2rem;
 }
 .BlockButton h5 {
+  line-height: 150%;
   color: light-dark(var(--gray-4), var(--gray-6));
   margin: 0;
   margin-bottom: 0.5rem;
@@ -53,6 +64,11 @@
   position: absolute;
   bottom: 1rem;
   right: 1rem;
+  opacity: 0.2;
+  transition: opacity 220ms ease-in;
+}
+.NotionIcon:hover {
+  opacity: 1;
 }
 .NotionIcon svg path {
   transition: fill 220ms ease-in;
