@@ -7,6 +7,7 @@ const VSCodeLogo = (props: SVGProps<SVGSVGElement>) => (
     viewBox="0 0 100 100"
     {...props}
   >
+    <title>VSCode</title>
     <mask
       id="a"
       width={100}
