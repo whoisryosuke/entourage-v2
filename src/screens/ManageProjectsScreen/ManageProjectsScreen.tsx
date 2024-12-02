@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import useAppStore from "../../store/store";
 import { useNavigate } from "react-router";
 import "./ManageProjectsScreen.css";
@@ -6,9 +6,7 @@ import "../ProjectsScreen/ProjectBar/ProjectBar.css";
 import { Project } from "../../store/types";
 import CloseIcon from "../../components/icons/CloseIcon";
 
-type Props = {};
-
-const ManageProjectsScreen = (props: Props) => {
+const ManageProjectsScreen = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const {
     blocks,

@@ -1,4 +1,3 @@
-import React from "react";
 import { Block } from "../../../../store/types";
 
 export const SORT_TYPES = {

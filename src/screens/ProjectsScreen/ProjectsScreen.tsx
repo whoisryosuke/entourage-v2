@@ -1,11 +1,8 @@
-import React from "react";
 import ProjectBar from "./ProjectBar/ProjectBar";
 import ProjectView from "./ProjectView/ProjectView";
 import AddBlockSidebar from "./AddBlockSidebar/AddBlockSidebar";
 
-type Props = {};
-
-const ProjectsScreen = (props: Props) => {
+const ProjectsScreen = () => {
   return (
     <div>
       <ProjectBar />

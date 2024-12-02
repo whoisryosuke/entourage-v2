@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useAppStore from "../../../store/store";
 import "./AddBlockSidebar.css";
 import {
@@ -6,15 +6,14 @@ import {
   BLOCK_TYPE_CMD_PLACEHOLDER,
   BLOCK_TYPE_DESCRIPTIONS,
   BLOCK_TYPES,
+  BlockTypes,
 } from "../../../store/types";
 import { open } from "@tauri-apps/plugin-dialog";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { create, BaseDirectory, remove } from "@tauri-apps/plugin-fs";
 import { getImage } from "../../../helpers/images";
 
-type Props = {};
-
-const AddBlockSidebar = (props: Props) => {
+const AddBlockSidebar = () => {
   const {
     currentProject,
     projectSidebar,
@@ -24,7 +23,7 @@ const AddBlockSidebar = (props: Props) => {
     editBlockId,
     clearEditBlockId,
   } = useAppStore();
-  const [type, setType] = useState(BLOCK_TYPES[0]);
+  const [type, setType] = useState<BlockTypes>(BLOCK_TYPES[0]);
   const nameRef = useRef<HTMLInputElement | null>(null);
   const commandRef = useRef<HTMLInputElement | null>(null);
   const notionRef = useRef<HTMLInputElement | null>(null);
@@ -39,9 +38,9 @@ const AddBlockSidebar = (props: Props) => {
     if (imagePath) getImageAndSave();
   }, [imagePath]);
 
-  const handleTypeChange = (e) => {
+  const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     console.log("changing project", e.currentTarget.value);
-    setType(e.currentTarget.value);
+    setType(e.currentTarget.value as BlockTypes);
   };
 
   const handleCreateBlock = async () => {
@@ -54,6 +53,7 @@ const AddBlockSidebar = (props: Props) => {
         ? notionRef.current.value.replace("https://", "")
         : "";
 
+    const now = new Date().getMilliseconds();
     const newBlock: Block = {
       name: nameRef.current.value,
       type,
@@ -61,6 +61,8 @@ const AddBlockSidebar = (props: Props) => {
       command: commandRef.current.value,
       notion: notionValue,
       image: imagePath,
+      created_time: now,
+      last_opened: now,
     };
 
     // Are we editing? Update block.

@@ -1,4 +1,3 @@
-import React from "react";
 import "./FilterProjects.css";
 
 type Props = {
