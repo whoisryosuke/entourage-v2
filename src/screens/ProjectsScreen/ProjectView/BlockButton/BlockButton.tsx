@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import {
   Block,
   BLOCK_TYPE_BACKEND_CMD,
+  BLOCK_TYPE_DESCRIPTIONS,
   BlockTypes,
 } from "../../../../store/types";
 import "./BlockButton.css";
@@ -67,8 +68,14 @@ const BlockButton = ({ block, index }: Props) => {
       <div
         className="content"
         onClick={editMode ? undefined : handleProject(block)}
+        title={BLOCK_TYPE_DESCRIPTIONS[block.type]}
       >
-        {block.image && <img src={imageSrc} />}
+        {block.image && (
+          <div
+            className="image"
+            style={{ backgroundImage: `url(${imageSrc})` }}
+          />
+        )}
         <div className="metadata">
           <Stack gap="12px">
             <BlockTypeIcon width="20px" height="20px" />
@@ -78,7 +85,11 @@ const BlockButton = ({ block, index }: Props) => {
         </div>
       </div>
       {block.notion != "" && (
-        <a href={`notion://${block.notion}`} className="NotionIcon">
+        <a
+          href={`notion://${block.notion}`}
+          className="NotionIcon"
+          title="Open notes in Notion desktop app"
+        >
           <NotionIcon width={24} height={24} />
         </a>
       )}
