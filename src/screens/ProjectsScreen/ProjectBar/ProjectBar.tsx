@@ -2,6 +2,7 @@ import React from "react";
 import "./ProjectBar.css";
 import useAppStore from "../../../store/store";
 import { useNavigate } from "react-router";
+import AppLogo from "../../../components/icons/AppLogo";
 
 type Props = {};
 
@@ -35,7 +36,11 @@ const ProjectBar = (props: Props) => {
   return (
     <div className="ProjectBar">
       <div className="content">
-        <div>
+        <div className="centered-row">
+          <AppLogo
+            className="Logo"
+            title="Entourage...clicking this does nothing"
+          />
           <select value={currentProject} onChange={handleProjectChange}>
             {projects.map((project) => (
               <option value={project.id}>{project.name}</option>
@@ -44,7 +49,7 @@ const ProjectBar = (props: Props) => {
           </select>
           <button onClick={handleNewProject}>Manage Projects</button>
         </div>
-        <div>
+        <div className="centered-row">
           {projects.length > 0 && currentProject != "" && (
             <>
               <button onClick={handleNewBlock}>New Block</button>

@@ -20,3 +20,20 @@
 .ProjectBar .content button:last-child {
   margin-right: 0;
 }
+
+.LogoContainer {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+}
+.Logo {
+  --fill: rgba(255, 255, 255, 0.5);
+  width: 24px;
+  height: 24px;
+  margin-right: 1rem;
+}
+
+.centered-row {
+  display: flex;
+  align-items: center;
+}
