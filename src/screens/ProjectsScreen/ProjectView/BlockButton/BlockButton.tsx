@@ -71,10 +71,12 @@ const BlockButton = ({ block, index }: Props) => {
         title={BLOCK_TYPE_DESCRIPTIONS[block.type]}
       >
         {block.image && (
-          <div
-            className="image"
-            style={{ backgroundImage: `url(${imageSrc})` }}
-          />
+          <div className="imageContainer">
+            <div
+              className="image"
+              style={{ backgroundImage: `url(${imageSrc})` }}
+            />
+          </div>
         )}
         <div className="metadata">
           <Stack gap="12px">
