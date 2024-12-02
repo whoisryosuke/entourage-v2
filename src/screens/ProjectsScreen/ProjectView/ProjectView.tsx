@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import useAppStore from "../../../store/store";
-import { convertFileSrc, invoke } from "@tauri-apps/api/core";
-import { Block, BlockTypes } from "../../../store/types";
-import { localDataDir } from "@tauri-apps/api/path";
+import { BlockTypes } from "../../../store/types";
 import BlockButton from "./BlockButton/BlockButton";
 import "./ProjectView.css";
 import FilterProjects from "./FilterProjects/FilterProjects";
@@ -13,9 +11,7 @@ import SortBlocks, {
 import Stack from "../../../components/Stack/Stack";
 import FilterType from "./FilterType";
 
-type Props = {};
-
-const ProjectView = (props: Props) => {
+const ProjectView = () => {
   const [projectFilter, setProjectFilter] = useState("");
   const [sortType, setSortType] = useState<SortTypes>("recent");
   const [blockTypeFilter, setBlockTypeFilter] = useState<BlockTypes | "all">(
@@ -23,15 +19,17 @@ const ProjectView = (props: Props) => {
   );
   const { currentProject, blocks } = useAppStore();
 
-  const handleBlockTypeFilterChange = (e) => {
-    setBlockTypeFilter(e.currentTarget.value);
+  const handleBlockTypeFilterChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setBlockTypeFilter(e.currentTarget.value as BlockTypes | "all");
   };
 
-  const handleSortTypeChange = (e) => {
-    setSortType(e.currentTarget.value);
+  const handleSortTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortType(e.currentTarget.value as SortTypes);
   };
 
-  const handleProjectFilter = (e) => {
+  const handleProjectFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProjectFilter(e.currentTarget.value);
   };
 

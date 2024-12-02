@@ -1,6 +1,5 @@
-import { convertFileSrc, invoke } from "@tauri-apps/api/core";
-import { appLocalDataDir, localDataDir } from "@tauri-apps/api/path";
-import React, { useEffect, useState } from "react";
+import { invoke } from "@tauri-apps/api/core";
+import { useEffect, useState } from "react";
 import {
   Block,
   BLOCK_TYPE_BACKEND_CMD,

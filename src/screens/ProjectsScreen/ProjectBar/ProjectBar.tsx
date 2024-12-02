@@ -4,9 +4,7 @@ import useAppStore from "../../../store/store";
 import { useNavigate } from "react-router";
 import AppLogo from "../../../components/icons/AppLogo";
 
-type Props = {};
-
-const ProjectBar = (props: Props) => {
+const ProjectBar = () => {
   const {
     projects,
     currentProject,
@@ -21,7 +19,7 @@ const ProjectBar = (props: Props) => {
     navigate("/manage-projects");
   };
 
-  const handleProjectChange = (e) => {
+  const handleProjectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     console.log("changing project", e.currentTarget.value);
     setCurrentProject(e.currentTarget.value);
   };

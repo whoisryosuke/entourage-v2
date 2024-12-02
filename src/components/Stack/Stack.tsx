@@ -20,10 +20,12 @@ const Stack = ({
   return (
     <div
       className={`stack ${direction} ${className}`}
-      style={{
-        ...style,
-        "--gap": gap,
-      }}
+      style={
+        {
+          ...style,
+          "--gap": gap,
+        } as React.CSSProperties
+      }
       {...props}
     >
       {children}
