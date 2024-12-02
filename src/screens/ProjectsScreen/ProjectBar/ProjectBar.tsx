@@ -37,10 +37,7 @@ const ProjectBar = (props: Props) => {
     <div className="ProjectBar">
       <div className="content">
         <div className="centered-row">
-          <AppLogo
-            className="Logo"
-            title="Entourage...clicking this does nothing"
-          />
+          <AppLogo className="Logo" />
           <select value={currentProject} onChange={handleProjectChange}>
             {projects.map((project) => (
               <option value={project.id}>{project.name}</option>
