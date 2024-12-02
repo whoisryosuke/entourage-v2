@@ -355,6 +355,7 @@ body {
 
   background-image: url("images/bg.png");
   background-size: cover;
+  z-index: -3;
 }
 
 .container {

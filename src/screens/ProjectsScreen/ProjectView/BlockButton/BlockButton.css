@@ -3,12 +3,12 @@
   height: fit-content;
   text-align: left;
   position: relative;
-  border-radius: 0.25rem;
+  border-radius: 0.75rem;
   overflow: hidden;
   cursor: pointer;
-  filter: drop-shadow(0px 4px 28.8px rgba(0, 0, 0, 0.25))
+  /* filter: drop-shadow(0px 4px 28.8px rgba(0, 0, 0, 0.25))
     drop-shadow(0px 4px 13.6px rgba(0, 0, 0, 0.1))
-    drop-shadow(0px 4px 5.1px rgba(0, 0, 0, 0.1));
+    drop-shadow(0px 4px 5.1px rgba(0, 0, 0, 0.1)); */
 }
 
 .BlockButton .button-bg {
@@ -17,13 +17,30 @@
   z-index: 1;
   cursor: pointer;
 }
+.BlockButton .content:before {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  z-index: -2;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+  border-radius: inherit;
+  border: 0.0625em solid rgba(255, 255, 255, 0.1);
+  box-shadow: rgba(10, 10, 14, 0.1) 0px 2px 16px 0px;
+  mask-image: linear-gradient(290deg, rgb(0, 0, 0), rgba(0, 0, 0, 0.25) 100%);
+}
 .BlockButton .content {
   position: relative;
-  background-color: light-dark(var(--gray-4), var(--gray-9));
+  /* background-color: light-dark(var(--gray-4), var(--gray-9)); */
+  z-index: 421;
 }
 
 .BlockButton .image {
   position: relative;
+  width: 100%;
+  min-height: 300px;
+  background-size: cover;
+  background-position: center;
 }
 
 .BlockButton .metadata {
@@ -34,6 +51,7 @@
 }
 .BlockButton img {
   width: 100%;
+  min-height: 300px;
 }
 
 .BlockButton h3 {
@@ -41,6 +59,7 @@
   margin-bottom: 0.2rem;
 }
 .BlockButton h5 {
+  width: 90%;
   line-height: 150%;
   color: light-dark(var(--gray-4), var(--gray-6));
   margin: 0;
@@ -51,6 +70,7 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
+  z-index: 710;
 }
 .BlockButton .controls button {
   padding: 0.25rem 0.5rem;
@@ -66,6 +86,7 @@
   right: 1rem;
   opacity: 0.2;
   transition: opacity 220ms ease-in;
+  z-index: 710;
 }
 .NotionIcon:hover {
   opacity: 1;
