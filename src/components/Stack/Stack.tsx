@@ -5,6 +5,7 @@ type Props = {
   vertical?: boolean;
   gap?: CSSProperties["marginTop"];
   style?: CSSProperties;
+  className?: string;
 };
 
 const Stack = ({
@@ -12,12 +13,13 @@ const Stack = ({
   gap = "8px",
   children,
   style,
+  className = "",
   ...props
 }: PropsWithChildren<Props>) => {
   const direction = vertical ? "vertical" : "horizontal";
   return (
     <div
-      className={`stack ${direction}`}
+      className={`stack ${direction} ${className}`}
       style={{
         ...style,
         "--gap": gap,

@@ -8,7 +8,6 @@
   grid-auto-rows: minmax(50px, auto);
 }
 .FilterProjects {
-  margin-bottom: 1rem;
   display: flex;
   justify-content: stretch;
   flex-direction: column;
@@ -18,4 +17,9 @@
   .ProjectGrid {
     grid-template-columns: repeat(6, 1fr);
   }
+}
+
+.SearchContainer {
+  align-items: center;
+  margin-bottom: 1rem;
 }

@@ -55,7 +55,7 @@ const ProjectView = (props: Props) => {
 
   return (
     <div className="ProjectView">
-      <Stack>
+      <Stack className="SearchContainer">
         <FilterProjects value={projectFilter} onChange={handleProjectFilter} />
         <FilterType
           blockTypeFilter={blockTypeFilter}
