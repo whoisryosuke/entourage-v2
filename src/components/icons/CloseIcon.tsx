@@ -4,7 +4,7 @@ import { SVGProps } from "react";
 type Props = SVGProps<SVGSVGElement> & {
   fill?: React.CSSProperties["fill"];
 };
-const CloseIcon = ({ fill = "#484848", ...props }: Props) => (
+const CloseIcon = ({ fill = "var(--fill, #484848)", ...props }: Props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}

@@ -2,7 +2,7 @@ import * as React from "react";
 type Props = React.SVGProps<SVGSVGElement> & {
   fill?: React.CSSProperties["fill"];
 };
-const EditIcon = ({ fill = "#484848", ...props }: Props) => (
+const EditIcon = ({ fill = "var(--fill, #484848)", ...props }: Props) => (
   <svg
     width={24}
     height={24}

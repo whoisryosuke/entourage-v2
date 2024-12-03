@@ -16,6 +16,7 @@ import { getImage } from "../../../../helpers/images";
 import VSCodeLogo from "../../../../components/icons/VSCodeLogo";
 import BlenderLogo from "../../../../components/icons/BlenderLogo";
 import Stack from "../../../../components/Stack/Stack";
+import GlassButton from "../../../../components/GlassButton";
 
 const BLOCK_TYPE_ICONS: Record<BlockTypes, (props: any) => JSX.Element> = {
   vscode: VSCodeLogo,
@@ -103,12 +104,12 @@ const BlockButton = ({ block }: Props) => {
       )}
       {editMode && (
         <div className="controls">
-          <button title="Edit Block" onClick={handleEditBlock}>
+          <GlassButton title="Edit Block" onClick={handleEditBlock}>
             <EditIcon width={18} height={18} />
-          </button>
-          <button title="Remove Block" onClick={handleRemoveBlock}>
+          </GlassButton>
+          <GlassButton title="Remove Block" onClick={handleRemoveBlock}>
             <TrashIcon width={18} height={18} />
-          </button>
+          </GlassButton>
         </div>
       )}
     </div>

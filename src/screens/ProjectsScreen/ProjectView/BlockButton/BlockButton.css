@@ -83,12 +83,22 @@
   top: 1rem;
   right: 1rem;
   z-index: 710;
+  display: flex;
 }
 .BlockButton .controls button {
   padding: 0.25rem 0.5rem;
   margin-right: 0.5rem;
 }
 .BlockButton .controls button:last-child {
+  margin-right: 0;
+}
+.BlockButton .controls svg {
+  --fill: light-dark(var(--gray-6), var(--gray-4));
+}
+.BlockButton .controls svg:hover {
+  --fill: light-dark(var(--blue-6), var(--blue-4));
+}
+.BlockButton .controls button svg {
   margin-right: 0;
 }
 
