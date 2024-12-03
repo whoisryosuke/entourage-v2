@@ -41,7 +41,14 @@ const ManageProjectsScreen = () => {
     navigate("/");
   };
 
-  const handleRemoveProject = (index: number) => () => {
+  const handleRemoveProject = (index: number) => async () => {
+    const shouldDelete = await confirm(
+      `Do you want to delete ${projects[index].name}?`
+    );
+    if (shouldDelete) deleteProject(index);
+  };
+
+  const deleteProject = (index: number) => {
     // If it's the last project removed, wipe out current project
     if (projects.length == 1) setCurrentProject("");
     removeProject(index);
