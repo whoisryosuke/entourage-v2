@@ -1,19 +1,24 @@
-import { ComponentProps, CSSProperties, PropsWithChildren } from "react";
+import {
+  ComponentProps,
+  CSSProperties,
+  forwardRef,
+  PropsWithChildren,
+} from "react";
 
 type Props = ComponentProps<"input"> & {
   containerStyle?: CSSProperties;
 };
 
-const Input = ({
-  children,
-  containerStyle = {},
-  ...props
-}: PropsWithChildren<Props>) => {
-  return (
-    <div className="Input" style={containerStyle}>
-      <input {...props}>{children}</input>
-    </div>
-  );
-};
+const Input = forwardRef<HTMLInputElement, PropsWithChildren<Props>>(
+  ({ children, containerStyle = {}, ...props }, ref) => {
+    return (
+      <div className="Input" style={containerStyle}>
+        <input ref={ref} {...props}>
+          {children}
+        </input>
+      </div>
+    );
+  }
+);
 
 export default Input;
