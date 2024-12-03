@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "bundle": "tauri build --debug && tauri bundle",
+    "bundle": "tauri build && tauri bundle",
     "preview": "vite preview",
     "tauri": "tauri"
   },
