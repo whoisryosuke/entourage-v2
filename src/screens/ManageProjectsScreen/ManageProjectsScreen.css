@@ -25,6 +25,6 @@
 .project-list li em {
   font-size: 0.8rem;
 }
-.project-input-container input {
+.project-input-container .Input {
   margin-bottom: 1rem;
 }

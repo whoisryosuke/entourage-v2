@@ -5,6 +5,8 @@ import "./ManageProjectsScreen.css";
 import "../ProjectsScreen/ProjectBar/ProjectBar.css";
 import { Project } from "../../store/types";
 import CloseIcon from "../../components/icons/CloseIcon";
+import GlassButton from "../../components/GlassButton";
+import Input from "../../components/Input";
 
 const ManageProjectsScreen = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -59,7 +61,9 @@ const ManageProjectsScreen = () => {
       <div className="ProjectBar">
         <div className="content manage-project-bar">
           <h2>Manage Projects:</h2>
-          <button onClick={handleBackProjects}>Back to projects</button>
+          <GlassButton onClick={handleBackProjects}>
+            Back to projects
+          </GlassButton>
         </div>
       </div>
       <div className="manage-project-container">
@@ -81,12 +85,12 @@ const ManageProjectsScreen = () => {
                           {numBlocks > 1 || (numBlocks == 0 && "s")})
                         </em>
                       </span>{" "}
-                      <button
+                      <GlassButton
                         title="Remove Project"
                         onClick={handleRemoveProject(index)}
                       >
                         <CloseIcon />
-                      </button>
+                      </GlassButton>
                     </li>
                   );
                 })}
@@ -101,8 +105,8 @@ const ManageProjectsScreen = () => {
             }}
           >
             <h3>New project:</h3>
-            <input ref={inputRef} type="text" placeholder="Project Name" />
-            <button onClick={handleAddProject}>Add Project</button>
+            <Input ref={inputRef} type="text" placeholder="Project Name" />
+            <GlassButton onClick={handleAddProject}>Add Project</GlassButton>
           </div>
         </div>
       </div>

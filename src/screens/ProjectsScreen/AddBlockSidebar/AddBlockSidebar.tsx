@@ -12,6 +12,10 @@ import { open } from "@tauri-apps/plugin-dialog";
 import { create, BaseDirectory, remove, readFile } from "@tauri-apps/plugin-fs";
 import { getImage } from "../../../helpers/images";
 import { v4 as generateUuid } from "uuid";
+import Input from "../../../components/Input";
+import Stack from "../../../components/Stack/Stack";
+import Select from "../../../components/Select";
+import GlassButton from "../../../components/GlassButton";
 
 const AddBlockSidebar = () => {
   const {
@@ -178,43 +182,50 @@ const AddBlockSidebar = () => {
       />
       <div className={`AddBlockSidebar ${openStatus}`}>
         <div className="content">
-          <input
-            ref={nameRef}
-            name="block-name"
-            type="text"
-            placeholder="Name of block"
-          />
-          <input
-            ref={commandRef}
-            name="block-command"
-            type="text"
-            placeholder={BLOCK_TYPE_CMD_PLACEHOLDER[type]}
-          />
-          <input
-            ref={notionRef}
-            name="block-notion"
-            type="text"
-            placeholder="Notion Project URL"
-          />
-          <label htmlFor="block-type">Command Type:</label>
-          <select name="block-type" value={type} onChange={handleTypeChange}>
-            {BLOCK_TYPES.map((blockType) => (
-              <option value={blockType}>
-                {BLOCK_TYPE_DESCRIPTIONS[blockType]}
-              </option>
-            ))}
-          </select>
-          <div
-            className="image-preview"
-            style={{ backgroundImage: `url(${imageSrc})` }}
-          />
-          <button onClick={handleSelectImage}>Select new image</button>
-          <button onClick={handleCreateBlock}>
-            {editBlockId != "" ? "Save changes" : "Create block"}
-          </button>
-          {editBlockId != "" && (
-            <button onClick={handleCancelEdit}>Cancel editing</button>
-          )}
+          <Stack vertical>
+            <Input
+              ref={nameRef}
+              name="block-name"
+              type="text"
+              placeholder="Name of block"
+            />
+            <Input
+              ref={commandRef}
+              name="block-command"
+              type="text"
+              placeholder={BLOCK_TYPE_CMD_PLACEHOLDER[type]}
+            />
+            <Input
+              ref={notionRef}
+              name="block-notion"
+              type="text"
+              placeholder="Notion Project URL"
+            />
+
+            <label htmlFor="block-type">Command Type:</label>
+            <Select name="block-type" value={type} onChange={handleTypeChange}>
+              {BLOCK_TYPES.map((blockType) => (
+                <option value={blockType}>
+                  {BLOCK_TYPE_DESCRIPTIONS[blockType]}
+                </option>
+              ))}
+            </Select>
+            <div
+              className="image-preview"
+              style={{ backgroundImage: `url(${imageSrc})` }}
+            />
+            <GlassButton onClick={handleSelectImage}>
+              Select new image
+            </GlassButton>
+            <GlassButton onClick={handleCreateBlock}>
+              {editBlockId != "" ? "Save changes" : "Create block"}
+            </GlassButton>
+            {editBlockId != "" && (
+              <GlassButton onClick={handleCancelEdit}>
+                Cancel editing
+              </GlassButton>
+            )}
+          </Stack>
         </div>
       </div>
     </>
