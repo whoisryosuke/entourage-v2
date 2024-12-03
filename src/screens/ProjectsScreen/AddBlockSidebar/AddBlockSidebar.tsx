@@ -43,6 +43,18 @@ const AddBlockSidebar = () => {
     setType(e.currentTarget.value as BlockTypes);
   };
 
+  const clearInputs = () => {
+    if (nameRef.current == null) return;
+    if (notionRef.current == null) return;
+    if (commandRef.current == null) return;
+    // Clear inputs
+    nameRef.current.value = "";
+    commandRef.current.value = "";
+    notionRef.current.value = "";
+    setImagePath("");
+    setImageSrc("");
+  };
+
   const handleCreateBlock = async () => {
     if (nameRef.current == null) return;
     if (notionRef.current == null) return;
@@ -78,12 +90,7 @@ const AddBlockSidebar = () => {
       addBlock(newBlock);
     }
 
-    // Clear inputs
-    nameRef.current.value = "";
-    commandRef.current.value = "";
-    notionRef.current.value = "";
-    setImagePath("");
-    setImageSrc("");
+    clearInputs();
   };
 
   const handleSelectImage = async () => {
@@ -129,6 +136,7 @@ const AddBlockSidebar = () => {
   };
 
   const handleCancelEdit = () => {
+    clearInputs();
     clearEditBlockId();
   };
 
