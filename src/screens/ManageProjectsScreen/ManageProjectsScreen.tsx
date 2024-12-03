@@ -7,6 +7,7 @@ import { Project } from "../../store/types";
 import CloseIcon from "../../components/icons/CloseIcon";
 import GlassButton from "../../components/GlassButton";
 import Input from "../../components/Input";
+import { v4 as generateUuid } from "uuid";
 
 const ManageProjectsScreen = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -28,7 +29,7 @@ const ManageProjectsScreen = () => {
     const exists = projects.find((project) => project.name == name);
     if (exists) return;
 
-    const hash = Number(new Date()).toString(36);
+    const hash = generateUuid();
     const newProject: Project = {
       id: hash,
       name,
