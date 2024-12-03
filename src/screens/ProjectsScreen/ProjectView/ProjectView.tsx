@@ -45,6 +45,8 @@ const ProjectView = () => {
     )
     .sort(SORT_ALGORITHMS[sortType]);
 
+  const isFiltered = projectFilter != "" || blockTypeFilter !== "all";
+
   const projectBlocks = filteredBlocks.map((block) => (
     <BlockButton key={block.id} block={block} />
   ));
@@ -68,7 +70,9 @@ const ProjectView = () => {
         {projectBlocks.length > 0 ? (
           projectBlocks
         ) : (
-          <div style={{ padding: "1rem" }}>Create some blocks!</div>
+          <div style={{ padding: "1rem" }}>
+            {isFiltered ? "No blocks  found" : "Create some blocks!"}
+          </div>
         )}
       </div>
     </div>

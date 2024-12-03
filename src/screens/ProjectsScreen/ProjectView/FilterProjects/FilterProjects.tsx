@@ -1,3 +1,4 @@
+import Input from "../../../../components/Input";
 import "./FilterProjects.css";
 
 type Props = {
@@ -8,7 +9,7 @@ type Props = {
 const FilterProjects = ({ value, onChange }: Props) => {
   return (
     <div className="FilterProjects">
-      <input
+      <Input
         type="text"
         name="filter-projects"
         placeholder="Filter projects by name..."

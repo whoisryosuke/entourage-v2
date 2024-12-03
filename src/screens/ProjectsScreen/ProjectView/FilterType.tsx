@@ -1,3 +1,4 @@
+import Select from "../../../components/Select";
 import { BLOCK_TYPE_TITLES, BLOCK_TYPES } from "../../../store/types";
 
 type Props = {
@@ -16,14 +17,14 @@ const FilterType = ({
     </option>
   ));
   return (
-    <select
+    <Select
       value={blockTypeFilter}
       onChange={handleBlockTypeFilterChange}
       {...props}
     >
       <option value="all">All</option>
       {options}
-    </select>
+    </Select>
   );
 };
 

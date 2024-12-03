@@ -1,3 +1,4 @@
+import Select from "../../../../components/Select";
 import { Block } from "../../../../store/types";
 
 export const SORT_TYPES = {
@@ -28,9 +29,9 @@ const SortBlocks = ({ sortType, handleSortTypeChange, ...props }: Props) => {
     </option>
   ));
   return (
-    <select value={sortType} onChange={handleSortTypeChange} {...props}>
+    <Select value={sortType} onChange={handleSortTypeChange} {...props}>
       {options}
-    </select>
+    </Select>
   );
 };
 

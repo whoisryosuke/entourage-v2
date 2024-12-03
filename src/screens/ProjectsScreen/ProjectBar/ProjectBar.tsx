@@ -3,6 +3,9 @@ import "./ProjectBar.css";
 import useAppStore from "../../../store/store";
 import { useNavigate } from "react-router";
 import AppLogo from "../../../components/icons/AppLogo";
+import PlusCircleIcon from "../../../components/icons/PlusCircleIcon";
+import GlassButton from "../../../components/GlassButton";
+import Select from "../../../components/Select";
 
 const ProjectBar = () => {
   const {
@@ -36,21 +39,27 @@ const ProjectBar = () => {
       <div className="content">
         <div className="centered-row">
           <AppLogo className="Logo" />
-          <select value={currentProject} onChange={handleProjectChange}>
+          <Select
+            value={currentProject}
+            onChange={handleProjectChange}
+            containerStyle={{ marginRight: "0.5rem" }}
+          >
             {projects.map((project) => (
               <option value={project.id}>{project.name}</option>
             ))}
             {projects.length == 0 && <option>Please add one</option>}
-          </select>
-          <button onClick={handleNewProject}>Manage Projects</button>
+          </Select>
+          <GlassButton onClick={handleNewProject}>Manage Projects</GlassButton>
         </div>
         <div className="centered-row">
           {projects.length > 0 && currentProject != "" && (
             <>
-              <button onClick={handleNewBlock}>New Block</button>
-              <button onClick={handleEditMode}>
+              <GlassButton onClick={handleNewBlock}>
+                <PlusCircleIcon /> New Block
+              </GlassButton>
+              <GlassButton onClick={handleEditMode}>
                 {editMode ? "Done editing" : "Edit Blocks"}
-              </button>
+              </GlassButton>
             </>
           )}
         </div>

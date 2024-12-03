@@ -345,6 +345,7 @@
   --page-bg: light-dark(var(--gray-2), var(--gray-8));
   --text-color: light-dark(var(--gray-8), var(--gray-1));
   --border-color: light-dark(var(--gray-3), var(--gray-7));
+  --border-radius: 0.5rem;
 }
 
 body {
@@ -400,31 +401,88 @@ h1 {
   text-align: center;
 }
 
+.Input,
+.Select {
+  position: relative;
+  display: flex;
+}
+
+.Input input {
+  flex: 1;
+}
+
+.Input:before,
+.Select:before,
+button:before {
+  content: "";
+  position: absolute;
+  inset: 0px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+  border-radius: inherit;
+  border: 0.0625em solid rgba(255, 255, 255, 0.1);
+  box-shadow: rgba(10, 10, 14, 0.1) 0px 2px 16px 0px;
+  mask-image: linear-gradient(290deg, rgb(0, 0, 0), rgba(0, 0, 0, 0.25) 100%);
+  border-radius: var(--border-radius);
+  z-index: 420;
+  transition: border-color 420ms ease-in;
+}
 input,
 select,
 button {
-  border-radius: 8px;
+  --border-radius: 0.5rem;
+  position: relative;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
   color: #0f0f0f;
-  background-color: #ffffff;
-  transition: border-color 0.25s;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  /* background-color: #ffffff; */
+  background: transparent;
+  /* box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); */
+  transition: color 420ms ease-in;
+  z-index: 710;
+}
+
+button .btn-content {
+  position: relative;
+  z-index: 710;
+  display: flex;
+  align-items: center;
 }
 
 button {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+button svg {
+  margin-right: 0.5rem;
+}
+button:hover svg {
+  --fill: var(--blue-6);
+}
+button path {
+  transition: fill 420ms ease-in;
 }
 
+.Input:hover:before,
+.Select:hover:before,
+button:hover:before,
+.Input:active:before,
+.Select:active:before,
+button:active:before {
+  border-color: var(--blue-6);
+}
+input:hover,
+select:hover,
 button:hover {
-  border-color: #396cd8;
+  color: var(--blue-6);
 }
 button:active {
-  border-color: #396cd8;
-  background-color: #e8e8e8;
+  /* border-color: var(--blue-6); */
+  /* background-color: #e8e8e8; */
 }
 
 #greet-input {
@@ -445,9 +503,9 @@ button:active {
   button,
   select {
     color: #ffffff;
-    background-color: #0f0f0f98;
+    /* background-color: #0f0f0f98; */
   }
   button:active {
-    background-color: #0f0f0f69;
+    /* background-color: #0f0f0f69; */
   }
 }
