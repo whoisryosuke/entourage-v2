@@ -6,6 +6,8 @@ import AppLogo from "../../../components/icons/AppLogo";
 import PlusCircleIcon from "../../../components/icons/PlusCircleIcon";
 import GlassButton from "../../../components/GlassButton";
 import Select from "../../../components/Select";
+import MessageSquareEditIcon from "../../../components/icons/MessageSquareEditIcon";
+import FolderOpenIcon from "../../../components/icons/FolderOpenIcon";
 
 const ProjectBar = () => {
   const {
@@ -49,7 +51,10 @@ const ProjectBar = () => {
             ))}
             {projects.length == 0 && <option>Please add one</option>}
           </Select>
-          <GlassButton onClick={handleNewProject}>Manage Projects</GlassButton>
+          <GlassButton onClick={handleNewProject}>
+            <FolderOpenIcon />
+            Manage Projects
+          </GlassButton>
         </div>
         <div className="centered-row">
           {projects.length > 0 && currentProject != "" && (
@@ -58,6 +63,7 @@ const ProjectBar = () => {
                 <PlusCircleIcon /> New Block
               </GlassButton>
               <GlassButton onClick={handleEditMode}>
+                <MessageSquareEditIcon />
                 {editMode ? "Done editing" : "Edit Blocks"}
               </GlassButton>
             </>

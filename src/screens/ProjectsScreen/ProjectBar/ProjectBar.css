@@ -31,6 +31,14 @@
   width: 24px;
   height: 24px;
   margin-right: 1rem;
+  transition: filter 420ms ease-in;
+}
+.Logo path {
+  transition: fill 420ms ease-in;
+}
+.Logo:hover {
+  filter: drop-shadow(0 0 10px var(--blue-6));
+  --fill: var(--blue-6);
 }
 
 .centered-row {
