@@ -43,7 +43,7 @@ const ManageProjectsScreen = () => {
 
   const handleRemoveProject = (index: number) => async () => {
     const shouldDelete = await confirm(
-      `Do you want to delete ${projects[index].name}?`
+      `Do you want to delete project: ${projects[index].name}?`
     );
     if (shouldDelete) deleteProject(index);
   };

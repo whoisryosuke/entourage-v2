@@ -45,7 +45,14 @@ const BlockButton = ({ block }: Props) => {
   const handleProject = (block: Block) => async () => {
     await invoke(BLOCK_TYPE_BACKEND_CMD[block.type], { name: block.command });
   };
-  const handleRemoveBlock = () => {
+  const handleRemoveBlock = async () => {
+    const shouldDelete = await confirm(
+      `Do you want to delete block: ${block.name}?`
+    );
+    if (shouldDelete) deleteBlock();
+  };
+
+  const deleteBlock = () => {
     removeBlock(block.id);
     // Delete image from disk
     remove(block.image, {
