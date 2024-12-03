@@ -8,6 +8,7 @@ A launcher for your personal projects and prototypes.
 - 🟦 Create blocks to run commands
 - ⚙️ **Commands**
   - Launch VSCode project
+  - Launch Blender project
 
 ## Development
 
@@ -71,7 +72,7 @@ await file.close();
 
 The **image path** is saved to the "Block" data, which is stored in a Zustand store that perists itself when the app is closed.
 
-To read the image, we use the get the path of the image locally (using the `appLocalDataDir()` method). Then we convert that local path to a web-friendly URL using Tauri's `convertFileSrc()`. This uses the configuration from `tauri.conf.json` under `app.security.csp` where we make a "asset URL" `https://asset.localhost`. You can also find the directories we're allowed to read from here, like `$APPLOCALDATADIR`.
+To read the image, we use the get the path of the image locally (using the `appLocalDataDir()` method). Then we convert that local path to a web-friendly URL using Tauri's `convertFileSrc()`. This uses the configuration from `tauri.conf.json` under `app.security.csp` where we make a "asset URL" `http://asset.localhost`. You can also find the directories we're allowed to read from here, like `$APPLOCALDATADIR`.
 
 ```js
 import { convertFileSrc, invoke } from "@tauri-apps/api/core";
