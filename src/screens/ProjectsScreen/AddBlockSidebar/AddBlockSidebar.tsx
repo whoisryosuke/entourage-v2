@@ -29,6 +29,7 @@ const AddBlockSidebar = () => {
   const notionRef = useRef<HTMLInputElement | null>(null);
   const [imagePath, setImagePath] = useState("");
   const [imageSrc, setImageSrc] = useState("");
+  const [currentBlock, setCurrentBlock] = useState<Block | null>(null);
 
   useEffect(() => {
     const getImageAndSave = async () => {
@@ -59,28 +60,36 @@ const AddBlockSidebar = () => {
     if (nameRef.current == null) return;
     if (notionRef.current == null) return;
     if (commandRef.current == null) return;
+    const isUpdatingBlock = editBlockId != "";
 
     const notionValue =
       notionRef.current.value != ""
         ? notionRef.current.value.replace("https://", "")
         : "";
 
+    // We create a new Block here to insert into "DB"
+    // Since we create/update in same process, make sure to use prev data when necessary
     const now = new Date().getMilliseconds();
     const blockId = generateUuid();
+    const createdTime =
+      isUpdatingBlock && currentBlock ? currentBlock.created_time : now;
+    const lastOpened =
+      isUpdatingBlock && currentBlock ? currentBlock.last_opened : now;
     const newBlock: Block = {
-      id: blockId,
+      id: isUpdatingBlock ? editBlockId : blockId,
       name: nameRef.current.value,
       type,
       project: currentProject,
       command: commandRef.current.value,
       notion: notionValue,
       image: imagePath,
-      created_time: now,
-      last_opened: now,
+      created_time: createdTime,
+      last_opened: lastOpened,
     };
 
     // Are we editing? Update block.
-    if (editBlockId != "") {
+    if (isUpdatingBlock) {
+      console.log("updating block in store", newBlock);
       updateBlock(editBlockId, newBlock);
       // Close the sidebar and stop editing
       // TODO: Maybe don't do this? Let's user incrementally edit and close explictly?
@@ -148,14 +157,15 @@ const AddBlockSidebar = () => {
     if (editBlockId != "") {
       // Get current block
       const { blocks } = useAppStore.getState();
-      const currentBlock = blocks.find((block) => block.id == editBlockId);
-      if (!currentBlock) return;
+      const block = blocks.find((block) => block.id == editBlockId);
+      if (!block) return;
 
-      nameRef.current.value = currentBlock.name;
-      commandRef.current.value = currentBlock.command;
-      notionRef.current.value = currentBlock.notion;
-      console.log("setting block image", currentBlock.image);
-      setImagePath(currentBlock.image);
+      nameRef.current.value = block.name;
+      commandRef.current.value = block.command;
+      notionRef.current.value = block.notion;
+      console.log("setting block image", block.image);
+      setImagePath(block.image);
+      setCurrentBlock(block);
     }
   }, [editBlockId]);
 

@@ -88,11 +88,11 @@ export const useAppStore = create<AppState>()(
         updateBlock: (blockId, newBlock) =>
           set((state) => {
             const blocks = [...state.blocks];
-            blocks.map((block) =>
-              block.id == blockId ? { ...block, newBlock } : block
+            const updatedBlocks = blocks.map((block) =>
+              block.id == blockId ? ({ ...block, ...newBlock } as Block) : block
             );
             return {
-              blocks,
+              blocks: updatedBlocks,
             };
           }),
         removeBlock: (blockId) =>
