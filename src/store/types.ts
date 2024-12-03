@@ -23,6 +23,7 @@ export const BLOCK_TYPE_CMD_PLACEHOLDER: Record<BlockTypes, string> = {
 };
 
 export type Block = {
+  id: string;
   name: string;
   type: BlockTypes;
   // The associated project

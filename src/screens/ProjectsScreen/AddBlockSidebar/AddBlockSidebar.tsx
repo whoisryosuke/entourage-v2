@@ -9,9 +9,9 @@ import {
   BlockTypes,
 } from "../../../store/types";
 import { open } from "@tauri-apps/plugin-dialog";
-import { convertFileSrc } from "@tauri-apps/api/core";
-import { create, BaseDirectory, remove } from "@tauri-apps/plugin-fs";
+import { create, BaseDirectory, remove, readFile } from "@tauri-apps/plugin-fs";
 import { getImage } from "../../../helpers/images";
+import { v4 as generateUuid } from "uuid";
 
 const AddBlockSidebar = () => {
   const {
@@ -54,7 +54,9 @@ const AddBlockSidebar = () => {
         : "";
 
     const now = new Date().getMilliseconds();
+    const blockId = generateUuid();
     const newBlock: Block = {
+      id: blockId,
       name: nameRef.current.value,
       type,
       project: currentProject,
@@ -66,7 +68,7 @@ const AddBlockSidebar = () => {
     };
 
     // Are we editing? Update block.
-    if (editBlockId >= 0) {
+    if (editBlockId != "") {
       updateBlock(editBlockId, newBlock);
       // Close the sidebar and stop editing
       // TODO: Maybe don't do this? Let's user incrementally edit and close explictly?
@@ -111,19 +113,14 @@ const AddBlockSidebar = () => {
     // Save image to cache folder and keep path for Block
     const pathSplit = filepath.split(".");
     const fileExtension = pathSplit[pathSplit.length - 1];
-    const hash = Number(new Date()).toString(36);
+    const hash = generateUuid();
     const saveImagePath = `${hash}.${fileExtension}`;
     console.log("saving image path", saveImagePath);
 
     const file = await create(saveImagePath, {
       baseDir: BaseDirectory.AppLocalData,
     });
-    const newImageSrc = convertFileSrc(filepath);
-    // const newImageSrc = await getImage(filepath);
-    const imageData = await fetch(newImageSrc).then(
-      // Tauri requires a Uint8Array of data
-      async (res) => new Uint8Array(await res.arrayBuffer())
-    );
+    const imageData = await readFile(filepath);
     await file.write(imageData);
     await file.close();
 
@@ -140,10 +137,10 @@ const AddBlockSidebar = () => {
     if (nameRef.current == null) return;
     if (commandRef.current == null) return;
     if (notionRef.current == null) return;
-    if (editBlockId >= 0) {
+    if (editBlockId != "") {
       // Get current block
       const { blocks } = useAppStore.getState();
-      const currentBlock = blocks[editBlockId];
+      const currentBlock = blocks.find((block) => block.id == editBlockId);
       if (!currentBlock) return;
 
       nameRef.current.value = currentBlock.name;
@@ -195,9 +192,9 @@ const AddBlockSidebar = () => {
           />
           <button onClick={handleSelectImage}>Select new image</button>
           <button onClick={handleCreateBlock}>
-            {editBlockId >= 0 ? "Save changes" : "Create block"}
+            {editBlockId != "" ? "Save changes" : "Create block"}
           </button>
-          {editBlockId >= 0 && (
+          {editBlockId != "" && (
             <button onClick={handleCancelEdit}>Cancel editing</button>
           )}
         </div>

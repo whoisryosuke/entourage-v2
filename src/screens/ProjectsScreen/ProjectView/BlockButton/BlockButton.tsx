@@ -22,9 +22,9 @@ const BLOCK_TYPE_ICONS: Record<BlockTypes, (props: any) => JSX.Element> = {
   blender: BlenderLogo,
 };
 
-type Props = { block: Block; index: number };
+type Props = { block: Block };
 
-const BlockButton = ({ block, index }: Props) => {
+const BlockButton = ({ block }: Props) => {
   const {
     editMode,
     removeBlock,
@@ -46,7 +46,7 @@ const BlockButton = ({ block, index }: Props) => {
     await invoke(BLOCK_TYPE_BACKEND_CMD[block.type], { name: block.command });
   };
   const handleRemoveBlock = () => {
-    removeBlock(index);
+    removeBlock(block.id);
     // Delete image from disk
     remove(block.image, {
       baseDir: BaseDirectory.AppLocalData,
@@ -55,7 +55,7 @@ const BlockButton = ({ block, index }: Props) => {
 
   const handleEditBlock = () => {
     // Set this block as currently editing
-    setEditBlockId(index);
+    setEditBlockId(block.id);
     // Open the sidebar
     if (!projectSidebar) toggleProjectSidebar();
   };

@@ -45,8 +45,8 @@ const ProjectView = () => {
     )
     .sort(SORT_ALGORITHMS[sortType]);
 
-  const projectBlocks = filteredBlocks.map((block, blockIndex) => (
-    <BlockButton key={block.name} block={block} index={blockIndex} />
+  const projectBlocks = filteredBlocks.map((block) => (
+    <BlockButton key={block.id} block={block} />
   ));
 
   console.log("blocks", filteredBlocks);
