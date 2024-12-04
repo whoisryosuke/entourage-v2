@@ -17,6 +17,23 @@ import VSCodeLogo from "../../../../components/icons/VSCodeLogo";
 import BlenderLogo from "../../../../components/icons/BlenderLogo";
 import Stack from "../../../../components/Stack/Stack";
 import GlassButton from "../../../../components/GlassButton";
+import { motion, Variants } from "motion/react";
+
+const baseTransition = {
+  duration: 1,
+};
+const blockAnimations: Variants = {
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { when: "beforeChildren", ...baseTransition },
+  },
+  hidden: {
+    opacity: 0,
+    y: 100,
+    transition: { when: "afterChildren", ...baseTransition },
+  },
+};
 
 const BLOCK_TYPE_ICONS: Record<BlockTypes, (props: any) => JSX.Element> = {
   vscode: VSCodeLogo,
@@ -71,7 +88,15 @@ const BlockButton = ({ block }: Props) => {
   const BlockTypeIcon = BLOCK_TYPE_ICONS[block.type];
 
   return (
-    <div className="BlockButton">
+    <motion.div
+      className="BlockButton"
+      variants={blockAnimations}
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+      layout
+      // transition={{ duration: 6, ease: "ease-in" }}
+    >
       <div
         className="content"
         onClick={editMode ? undefined : handleProject(block)}
@@ -112,7 +137,7 @@ const BlockButton = ({ block }: Props) => {
           </GlassButton>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

@@ -10,6 +10,7 @@ import SortBlocks, {
 } from "./SortBlocks/SortBlocks";
 import Stack from "../../../components/Stack/Stack";
 import FilterType from "./FilterType";
+import { AnimatePresence } from "motion/react";
 
 const ProjectView = () => {
   const [projectFilter, setProjectFilter] = useState("");
@@ -67,13 +68,15 @@ const ProjectView = () => {
         />
       </Stack>
       <div className="ProjectGrid">
-        {projectBlocks.length > 0 ? (
-          projectBlocks
-        ) : (
-          <div style={{ padding: "1rem" }}>
-            {isFiltered ? "No blocks  found" : "Create some blocks!"}
-          </div>
-        )}
+        <AnimatePresence>
+          {projectBlocks.length > 0 ? (
+            projectBlocks
+          ) : (
+            <div style={{ padding: "1rem" }}>
+              {isFiltered ? "No blocks  found" : "Create some blocks!"}
+            </div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
