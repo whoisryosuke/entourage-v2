@@ -6,8 +6,10 @@ A launcher for your personal projects and prototypes.
 
 # Features
 
-- 📂 Manage multiple projects
-- 🟦 Create blocks to run commands
+- 📂 Manage multiple "projects"
+- 🟦 Create "blocks" to run commands
+- 📄 Quickly access **Notion** notes
+- 🔎 Search and filter blocks
 - ⚙️ **Commands**
   - Launch **VSCode** project
   - Launch **Blender** project
