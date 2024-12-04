@@ -2,6 +2,8 @@
 
 # Entourage
 
+![Entourage app icon](./docs/entourage-app-icon@128px.png)
+
 A launcher for your personal projects and prototypes.
 
 # Features
