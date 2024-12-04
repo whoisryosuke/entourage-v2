@@ -1,3 +1,5 @@
+![Entourage app running on Windows with 2 cards, one Blender and one VSCode project](./docs/screenshot-project-view.png)
+
 # Entourage
 
 A launcher for your personal projects and prototypes.
@@ -7,8 +9,8 @@ A launcher for your personal projects and prototypes.
 - 📂 Manage multiple projects
 - 🟦 Create blocks to run commands
 - ⚙️ **Commands**
-  - Launch VSCode project
-  - Launch Blender project
+  - Launch **VSCode** project
+  - Launch **Blender** project
 
 ## Development
 
@@ -16,95 +18,30 @@ A launcher for your personal projects and prototypes.
 1. `yarn`
 1. `yarn tauri dev`
 
+### Development Requirements
+
+- NodeJS
+- Yarn
+- Rust
+
 ### Recommended IDE Setup
 
 - [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
 
 # How it works
 
-## Image upload + viewing
+Check out [my blog](https://whoisryosuke.com/blog) where I break down this project and others like it.
 
-This took a bit to setup and figure out with the different modules and permission configurations. Also note we are on Tauri V2.
+# Release
 
-The user picks an image using Tauri's [Dialog module](https://v2.tauri.app/plugin/dialog/) and the `open()` method. This provides a local path to the file. We take this local file and display it to the user as a preview if possible. The allowed directories are in `tauri.conf.json` under the `app.security.assetProtocol.scope` section (we expect users to check Downloads folder for now).
+This process is for releasing the app as a bundled executable for production use.
 
-```js
-const handleSelectImage = async () => {
-  let filepath = await open({
-    multiple: false,
-    directory: false,
-    filters: [
-      {
-        name: "",
-        extensions: ["jpg", "jpeg", "gif", "png", "svg", "webp"],
-      },
-    ],
-  });
+1. `yarn` to install or update any dependencies.
+1. `yarn bundle` should build the web app, then generate the app, then generate an installer for the app.
+1. Your app should be in `\src-tauri\target\release\` (like an `.exe` for Windows). You can also find the "installer" version in `\src-tauri\target\release\bundle\` (like an `.msi` file for Windows).
+1. Go to GitHub and [create a new Release](https://github.com/whoisryosuke/entourage-v2/releases/new)
+1. Add the version number as the title and changelog in the description
+1. Upload the installer files from `\src-tauri\target\release\bundle\`
+1. Release!
 
-  if (!filepath) return;
-  console.log("file path", filepath);
-
-  // Save image URL
-  setImagePath(filepath);
-};
-```
-
-Once the "Block" is created, we "upload" the image to the user's local app data folder, inside the app-specific folder (`com.entourage.com`). This uses the Tauri [File System module](https://v2.tauri.app/plugin/file-system/#write) and the `write()` method to create a new file in the app's local AppData folder (little confusing I know). The permissions for this (like the directories we can write to) are defined in `src-tauri\capabilities\default.json`
-
-```js
-// Save image to cache folder and keep path for Block
-const pathSplit = imagePath.split(".");
-const fileExtension = pathSplit[pathSplit.length - 1];
-const hash = Number(new Date()).toString(36);
-const saveImagePath = `${hash}.${fileExtension}`;
-console.log("saving image path", saveImagePath);
-
-const file = await create(saveImagePath, {
-  baseDir: BaseDirectory.AppLocalData,
-});
-const imageData = await fetch(imageSrc).then(
-  // Tauri requires a Uint8Array of data
-  async (res) => new Uint8Array(await res.arrayBuffer())
-);
-await file.write(imageData);
-await file.close();
-```
-
-The **image path** is saved to the "Block" data, which is stored in a Zustand store that perists itself when the app is closed.
-
-To read the image, we use the get the path of the image locally (using the `appLocalDataDir()` method). Then we convert that local path to a web-friendly URL using Tauri's `convertFileSrc()`. This uses the configuration from `tauri.conf.json` under `app.security.csp` where we make a "asset URL" `http://asset.localhost`. You can also find the directories we're allowed to read from here, like `$APPLOCALDATADIR`.
-
-```js
-import { convertFileSrc, invoke } from "@tauri-apps/api/core";
-import { appLocalDataDir, localDataDir } from "@tauri-apps/api/path";
-import React, { useEffect, useState } from "react";
-import { Block } from "../../../../store/types";
-import "./BlockButton.css";
-
-type Props = { block: Block };
-
-const BlockButton = ({ block }: Props) => {
-  const [imageSrc, setImageSrc] = useState("");
-
-  // Fetch image locally from app local appdata folder
-  useEffect(() => {
-    const getImage = async () => {
-      const imagePath = `${await appLocalDataDir()}/${block.image}`;
-      const newImageSrc = convertFileSrc(imagePath);
-      setImageSrc(newImageSrc);
-    };
-    getImage();
-  }, [block]);
-
-  return (
-    <button className="BlockButton">
-      <img src={imageSrc} />
-      <h3>{block.name}</h3>
-    </button>
-  );
-};
-
-export default BlockButton;
-```
-
-> It's recommended you make a separate component for anything that needs to fetch an image, since it will need to use `async/await` to get the image URL.
+> Currently we only support Windows. I'll probably add a GitHub Action later to handle other platforms. If you're on Mac or Linux and want to use this, just do step 1 and you're good to go.
