@@ -18,6 +18,7 @@ import BlenderLogo from "../../../../components/icons/BlenderLogo";
 import Stack from "../../../../components/Stack/Stack";
 import GlassButton from "../../../../components/GlassButton";
 import { motion, Variants } from "motion/react";
+import VisualStudioLogo from "../../../../components/icons/VisualStudioLogo";
 
 const baseTransition = {
   duration: 1,
@@ -38,7 +39,7 @@ const blockAnimations: Variants = {
 const BLOCK_TYPE_ICONS: Record<BlockTypes, (props: any) => JSX.Element> = {
   vscode: VSCodeLogo,
   blender: BlenderLogo,
-  visualStudio: VSCodeLogo,
+  visualStudio: VisualStudioLogo,
 };
 
 type Props = { block: Block };
