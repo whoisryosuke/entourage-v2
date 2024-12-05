@@ -73,7 +73,7 @@ const AddBlockSidebar = () => {
 
     // We create a new Block here to insert into "DB"
     // Since we create/update in same process, make sure to use prev data when necessary
-    const now = new Date().getMilliseconds();
+    const now = Date.now();
     const blockId = generateUuid();
     const createdTime =
       isUpdatingBlock && currentBlock ? currentBlock.created_time : now;

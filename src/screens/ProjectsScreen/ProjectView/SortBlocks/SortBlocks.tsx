@@ -13,7 +13,7 @@ type SortFunction = (a: Block, b: Block) => number;
 export const SORT_ALGORITHMS: Record<SortTypes, SortFunction> = {
   alpha: (a, b) => a.name.localeCompare(b.name),
   alphaReverse: (a, b) => b.name.localeCompare(a.name),
-  recent: (a, b) => a.last_opened - b.last_opened,
+  recent: (a, b) => b.last_opened - a.last_opened,
   created: (a, b) => a.created_time - b.created_time,
 };
 

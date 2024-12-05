@@ -49,6 +49,7 @@ const BlockButton = ({ block }: Props) => {
     setEditBlockId,
     projectSidebar,
     toggleProjectSidebar,
+    updateBlock,
   } = useAppStore();
   const [imageSrc, setImageSrc] = useState("");
 
@@ -61,7 +62,13 @@ const BlockButton = ({ block }: Props) => {
   }, [block]);
 
   const handleProject = (block: Block) => async () => {
+    // Run block's action based on it's "type"
     await invoke(BLOCK_TYPE_BACKEND_CMD[block.type], { name: block.command });
+
+    // Update the block as recently used
+    updateBlock(block.id, {
+      last_opened: Date.now(),
+    });
   };
   const handleRemoveBlock = async () => {
     const shouldDelete = await confirm(
