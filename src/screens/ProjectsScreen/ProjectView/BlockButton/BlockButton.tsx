@@ -38,6 +38,7 @@ const blockAnimations: Variants = {
 const BLOCK_TYPE_ICONS: Record<BlockTypes, (props: any) => JSX.Element> = {
   vscode: VSCodeLogo,
   blender: BlenderLogo,
+  visualStudio: VSCodeLogo,
 };
 
 type Props = { block: Block };
