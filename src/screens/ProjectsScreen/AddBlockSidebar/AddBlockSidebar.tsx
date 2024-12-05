@@ -16,6 +16,8 @@ import Input from "../../../components/Input";
 import Stack from "../../../components/Stack/Stack";
 import Select from "../../../components/Select";
 import GlassButton from "../../../components/GlassButton";
+import ImagePlusIcon from "../../../components/icons/ImagePlusIcon";
+import FolderPlusIcon from "../../../components/icons/FolderPlusIcon";
 
 const AddBlockSidebar = () => {
   const {
@@ -64,6 +66,9 @@ const AddBlockSidebar = () => {
     if (nameRef.current == null) return;
     if (notionRef.current == null) return;
     if (commandRef.current == null) return;
+    // Required fields for a block
+    // TODO: Notify user since we aren't using a standard HTML form
+    if (nameRef.current.value == "" || commandRef.current.value == "") return;
     const isUpdatingBlock = editBlockId != "";
 
     const notionValue =
@@ -153,6 +158,17 @@ const AddBlockSidebar = () => {
     clearEditBlockId();
   };
 
+  const handleFileSelect = async () => {
+    let filepath = await open({
+      multiple: false,
+      directory: type == "vscode",
+    });
+    console.log("picked a folder!", filepath);
+    if (!filepath) return;
+    if (!commandRef.current) return;
+    commandRef.current.value = filepath;
+  };
+
   // If editing a block, hydrate the input form with block data
   useEffect(() => {
     if (nameRef.current == null) return;
@@ -188,12 +204,14 @@ const AddBlockSidebar = () => {
               name="block-name"
               type="text"
               placeholder="Name of block"
+              required
             />
             <Input
               ref={commandRef}
               name="block-command"
               type="text"
               placeholder={BLOCK_TYPE_CMD_PLACEHOLDER[type]}
+              required
             />
             <Input
               ref={notionRef}
@@ -210,12 +228,18 @@ const AddBlockSidebar = () => {
                 </option>
               ))}
             </Select>
+            <GlassButton
+              onClick={handleFileSelect}
+              title="Select a file or folder to use as the command above"
+            >
+              <FolderPlusIcon /> Select a file/folder
+            </GlassButton>
             <div
               className="image-preview"
               style={{ backgroundImage: `url(${imageSrc})` }}
             />
             <GlassButton onClick={handleSelectImage}>
-              Select new image
+              <ImagePlusIcon /> Select new image
             </GlassButton>
             <GlassButton onClick={handleCreateBlock}>
               {editBlockId != "" ? "Save changes" : "Create block"}
