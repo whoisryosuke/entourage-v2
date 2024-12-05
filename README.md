@@ -14,7 +14,8 @@ A launcher for your personal projects and prototypes.
 - 🔎 Search and filter blocks
 - ⚙️ **Commands**
   - Launch **VSCode** project
-  - Launch **Blender** project
+  - Launch **Visual Studio** solution
+  - Launch **Blender** files
 
 ## Development
 
