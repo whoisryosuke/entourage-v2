@@ -17,6 +17,20 @@ A launcher for your personal projects and prototypes.
   - Launch **Visual Studio** solution
   - Launch **Blender** files
 
+## Download
+
+You can [download the latest version here](https://github.com/whoisryosuke/entourage-v2/releases/latest). For Windows I recommend the `.msi` file which installs the app and creates a desktop shortcut. Or you can download the `.exe` directly and place it wherever you want.
+
+> Windows only for now. Mac/Linux coming soon.
+
+## Tips and Tricks
+
+### Image folder
+
+Images you assign to blocks are copied to a data folder for Entourage. This folder is located at: `%LocalAppData%\com.entourage.app`. You type that into your file browser's path bar - or do Windows + R and paste it in there.
+
+The app should automatically delete images when blocks are deleted. Be careful deleting files here, it may break some blocks or the entire app.
+
 ## Development
 
 1. Clone project.
