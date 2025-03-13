@@ -68,15 +68,19 @@
 
 .BlockButton h3 {
   margin: 0;
+  max-width: 225px;
   margin-bottom: 0.2rem;
+  word-wrap: break-word;
 }
 .BlockButton h5 {
   width: 90%;
+  max-width: 250px;
   line-height: 150%;
   color: light-dark(var(--gray-4), var(--gray-6));
   margin: 0;
   margin-bottom: 0.5rem;
   font-weight: 400;
+  word-wrap: break-word;
 }
 .BlockButton .controls {
   position: absolute;
