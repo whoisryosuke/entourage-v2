@@ -165,14 +165,26 @@ const AddBlockSidebar = () => {
   };
 
   const handleFileSelect = async () => {
+    // For certain commands, we want the user to select a folder vs single file
+    const directory = (
+      ["vscode", "openFolder", "launchCommandLine"] as Block["type"][]
+    ).includes(type);
+
     let filepath = await open({
       multiple: false,
-      directory: type == "vscode",
+      directory,
     });
+
     console.log("picked a folder!", filepath);
     if (!filepath) return;
-    if (!commandRef.current) return;
-    commandRef.current.value = filepath;
+
+    // For command lines, we have a separate input for path
+    if (type == "launchCommandLine") {
+      setPath(filepath);
+    } else {
+      if (!commandRef.current) return;
+      commandRef.current.value = filepath;
+    }
   };
 
   // If editing a block, hydrate the input form with block data
