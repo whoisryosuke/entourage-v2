@@ -445,6 +445,14 @@ button {
   z-index: 710;
 }
 
+select {
+  width: 100%;
+}
+
+select option {
+  background: var(--page-bg);
+}
+
 button .btn-content {
   position: relative;
   z-index: 710;
