@@ -11,21 +11,6 @@
     {
       "identifier": "fs:allow-localdata-write",
       "allow": [{ "path": "$APPLOCALDATA/*" }]
-    },
-    {
-      "identifier": "shell:allow-execute",
-      "allow": [
-        {
-          "name": "exec-sh",
-          "cmd": "sh",
-          "args": [
-            "-c",
-            {
-              "validator": "\\S+"
-            }
-          ]
-        }
-      ]
     }
   ]
 }
