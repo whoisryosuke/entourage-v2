@@ -19,6 +19,8 @@ import Stack from "../../../../components/Stack/Stack";
 import GlassButton from "../../../../components/GlassButton";
 import { motion, Variants } from "motion/react";
 import VisualStudioLogo from "../../../../components/icons/VisualStudioLogo";
+import CommandIcon from "../../../../components/icons/CommandIcon";
+import FolderOpenIcon from "../../../../components/icons/FolderOpenIcon";
 
 const baseTransition = {
   duration: 1,
@@ -39,6 +41,8 @@ const blockAnimations: Variants = {
 const BLOCK_TYPE_ICONS: Record<BlockTypes, (props: any) => JSX.Element> = {
   vscode: VSCodeLogo,
   blender: BlenderLogo,
+  openFolder: FolderOpenIcon,
+  launchCommandLine: CommandIcon,
   visualStudio: VisualStudioLogo,
 };
 
@@ -65,7 +69,10 @@ const BlockButton = ({ block }: Props) => {
 
   const handleProject = (block: Block) => async () => {
     // Run block's action based on it's "type"
-    await invoke(BLOCK_TYPE_BACKEND_CMD[block.type], { name: block.command });
+    await invoke(BLOCK_TYPE_BACKEND_CMD[block.type], {
+      name: block.command,
+      path: block.path,
+    });
 
     // Update the block as recently used
     updateBlock(block.id, {

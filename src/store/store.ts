@@ -28,12 +28,8 @@ export interface AppState {
 
 export const useAppStore = create<AppState>()(
   devtools(
-    // Optional persist
-    // This saves Zustand state when you close browser
-    // Good in some cases, but not in others, especially prototyping
     persist(
       (set) => ({
-        // We keep the NextJS router in state because it's undefined in most components
         currentProject: "",
         setCurrentProject: (currentProject) =>
           set(() => ({
@@ -99,11 +95,6 @@ export const useAppStore = create<AppState>()(
           set((state) => ({
             blocks: [...state.blocks.filter((block) => block.id !== blockId)],
           })),
-
-        // Add any default values for app-wide state here
-        // e.g. game start logic, points/score, etc
-        // gameStarted: true,
-        // points: 100,
       }),
 
       // END: Optional persist

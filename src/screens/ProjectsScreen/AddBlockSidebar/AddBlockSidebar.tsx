@@ -30,6 +30,7 @@ const AddBlockSidebar = () => {
     clearEditBlockId,
   } = useAppStore();
   const [type, setType] = useState<BlockTypes>(BLOCK_TYPES[0]);
+  const [path, setPath] = useState<string>("");
   const nameRef = useRef<HTMLInputElement | null>(null);
   const commandRef = useRef<HTMLInputElement | null>(null);
   const notionRef = useRef<HTMLInputElement | null>(null);
@@ -48,6 +49,10 @@ const AddBlockSidebar = () => {
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     console.log("changing project", e.currentTarget.value);
     setType(e.currentTarget.value as BlockTypes);
+  };
+
+  const handlePathChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPath(e.currentTarget.value);
   };
 
   const clearInputs = () => {
@@ -90,6 +95,7 @@ const AddBlockSidebar = () => {
       type,
       project: currentProject,
       command: commandRef.current.value,
+      path,
       notion: notionValue,
       image: imagePath,
       created_time: createdTime,
@@ -183,8 +189,9 @@ const AddBlockSidebar = () => {
       nameRef.current.value = block.name;
       commandRef.current.value = block.command;
       notionRef.current.value = block.notion;
-      console.log("setting block image", block.image);
       setImagePath(block.image);
+      setType(block.type);
+      setPath(block.path);
       setCurrentBlock(block);
     }
   }, [editBlockId]);
@@ -207,13 +214,6 @@ const AddBlockSidebar = () => {
               required
             />
             <Input
-              ref={commandRef}
-              name="block-command"
-              type="text"
-              placeholder={BLOCK_TYPE_CMD_PLACEHOLDER[type]}
-              required
-            />
-            <Input
               ref={notionRef}
               name="block-notion"
               type="text"
@@ -228,12 +228,29 @@ const AddBlockSidebar = () => {
                 </option>
               ))}
             </Select>
+            <Input
+              ref={commandRef}
+              name="block-command"
+              type="text"
+              placeholder={BLOCK_TYPE_CMD_PLACEHOLDER[type]}
+              required
+            />
+            {type == "launchCommandLine" && (
+              <Input
+                value={path}
+                name="block-path"
+                type="text"
+                placeholder="Directory path the command should run in"
+                onChange={handlePathChange}
+              />
+            )}
             <GlassButton
               onClick={handleFileSelect}
               title="Select a file or folder to use as the command above"
             >
               <FolderPlusIcon /> Select a file/folder
             </GlassButton>
+            <label htmlFor="block-type">Cover Image:</label>
             <div
               className="image-preview"
               style={{ backgroundImage: `url(${imageSrc})` }}
