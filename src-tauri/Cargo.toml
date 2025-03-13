@@ -1,6 +1,6 @@
 [package]
 name = "entourage-v2"
-version = "0.1.1"
+version = "0.1.2"
 description = "A launcher for your personal projects and prototypes."
 authors = ["Ryosuke Hana"]
 edition = "2021"
